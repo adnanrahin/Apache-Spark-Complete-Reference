@@ -21,7 +21,11 @@ object GitHubArchive {
 
     val sc = spark.sparkContext
 
-    val gitHubLogsDf = spark.read.json()
+    val gitHubLogsDf = spark.read.json("hdfs://localhost:9000/datasource/2015-03-01-0.json")
+
+    val pushes = gitHubLogsDf.filter("type = 'PushEvent'")
+
+    println(pushes.show(30))
 
   }
 
