@@ -1,5 +1,6 @@
 package org.apache.spark.githubarcheive
 
+import org.apache.log4j.{Level, Logger}
 import org.apache.spark.listhdfs.ListHdfsFiles
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
@@ -9,6 +10,8 @@ import scala.io.Source.fromFile
 object GitHubArchive {
 
   def main(args: Array[String]): Unit = {
+
+    Logger.getLogger("org").setLevel(Level.ERROR)
 
     val fileLists = new ListHdfsFiles()
 
