@@ -1,36 +1,49 @@
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+# bloop and metals
+.bloop
+.bsp
 
-### STS ###
-.apt_generated
+# metals
+project/metals.sbt
+.metals
+
+# vs code
+.vscode
+
+# scala 3
+.tasty
+
+# sbt
+project/project/
+project/target/
+target/
+
+# eclipse
+build/
 .classpath
-.factorypath
 .project
 .settings
-.springBeans
-.sts4-cache
+.worksheet
+bin/
+.cache
 
-### IntelliJ IDEA ###
-.idea
-*.iws
+# intellij idea
+*.log
 *.iml
 *.ipr
-*/.idea
+*.iws
+.idea
+
+# mac
+.DS_Store
+
+# other?
+.history
+.scala_dependencies
+.cache-main
+
+#general
+*.class
+
+
+#data
 datasource/
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-
-
-### VS Code ###
-.vscode/
-
-nohup.out
