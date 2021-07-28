@@ -23,9 +23,15 @@ object GitHubArchive {
 
     val gitHubLogsDf = spark.read.json("hdfs://localhost:9000/datasource/2015-03-01-0.json")
 
-    val pushes = gitHubLogsDf.filter("type = 'PushEvent'")
+    val pushEvent = gitHubLogsDf.filter("type = 'PushEvent'")
 
-    println(pushes.show(30))
+    println(pushEvent.show(30))
+
+    /** Group pushEvent dataset by actor.login* */
+
+    val actorLoginPushEvent = pushEvent.groupBy("actor.login").count()
+
+    println(actorLoginPushEvent.show(5))
 
   }
 
