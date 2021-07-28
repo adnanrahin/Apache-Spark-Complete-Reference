@@ -2,6 +2,7 @@ package org.apache.spark.githubarcheive
 
 import org.apache.spark.listhdfs.ListHdfsFiles
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions.col
 
 object GitHubArchive {
 
@@ -32,6 +33,15 @@ object GitHubArchive {
     val actorLoginPushEvent = pushEvent.groupBy("actor.login").count()
 
     println(actorLoginPushEvent.show(5))
+
+    /** actorLoginPushEven data set order by desc**/
+
+    val actorLoginOrder = pushEvent
+      .groupBy("actor.login")
+      .count
+      .orderBy(col("count").desc)
+
+    println(actorLoginOrder.show(5))
 
   }
 
