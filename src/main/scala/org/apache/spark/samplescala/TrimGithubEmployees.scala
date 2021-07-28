@@ -16,11 +16,13 @@ object TrimGithubEmployees {
 
     println(employees.getClass)
 
-    val findEmployeesNameStartWithVowel =
+    val filetEmployees =
       employees.filter(name => name.startsWith("a"))
 
-    println(findEmployeesNameStartWithVowel.toString())
-    println(findEmployeesNameStartWithVowel.getClass)
+    println(filetEmployees.toString())
+    println(filetEmployees.getClass)
+
+    val isEmp: (String => Boolean) = (arg: String) => employees.contains(arg)
 
   }
 
