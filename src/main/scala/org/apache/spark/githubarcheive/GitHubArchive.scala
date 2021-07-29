@@ -47,7 +47,7 @@ object GitHubArchive {
       } yield line.trim)
 
     val broadCastEmployeeSet = sc.broadcast(employeesSet)
-    
+
     import spark.implicits._
     val isEmp = user => broadCastEmployeeSet.value.contains(user)
 
