@@ -33,10 +33,10 @@ object CustomerTransaction {
 
     /** Find which customer made the most purchase* */
 
-    val (cid, purchase) = transactionByCustomer
+    val (cid, numberOfPurchase) = transactionByCustomer
       .countByKey().toSeq.maxBy(_._2)
 
-    println("Customer ID: " + cid + " Purchase: " + purchase)
+    println("Customer ID: " + cid + " Purchase: " + numberOfPurchase)
 
   }
 
