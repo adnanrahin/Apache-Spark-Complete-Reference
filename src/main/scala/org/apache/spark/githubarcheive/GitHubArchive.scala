@@ -1,7 +1,6 @@
 package org.apache.spark.githubarcheive
 
 import org.apache.log4j.{Level, Logger}
-import org.apache.spark.listhdfs.ListHdfsFiles
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.col
 
@@ -13,12 +12,6 @@ object GitHubArchive {
 
     Logger.getLogger("org").setLevel(Level.ERROR)
 
-    val fileLists = new ListHdfsFiles()
-
-    val listOfFiles = fileLists.listHdfsFiles("datasource")
-
-    listOfFiles.foreach(file => println(file.getPath))
-
     val spark = SparkSession
       .builder()
       .master("local[*]")
@@ -27,7 +20,7 @@ object GitHubArchive {
 
     val sc = spark.sparkContext
 
-    val gitHubLogsDf = spark.read.json("hdfs://localhost:9000/datasource/2015-03-01-0.json")
+    val gitHubLogsDf = spark.read.json(args(0))
 
     val pushEvent = gitHubLogsDf.filter("type = 'PushEvent'")
 
@@ -50,7 +43,7 @@ object GitHubArchive {
 
     val employeesSet = Set() ++ (
       for {
-        line <- fromFile("textdata/ghEmployees.txt").getLines
+        line <- fromFile(args(1)).getLines
       } yield line.trim)
 
     val broadCastEmployeeSet = sc.broadcast(employeesSet)
@@ -58,10 +51,11 @@ object GitHubArchive {
 
     import spark.implicits._
     val isEmp = user => broadCastEmployeeSet.value.contains(user)
-    val isEmployee = spark.udf.register("SetContainsUdf", isEmp)
-    val filtered = actorLoginOrder.filter(isEmployee($"login"))
-    println(filtered.show(5))
 
+    val sqlFunc = spark.udf.register("SetContainsUdf", isEmp)
+    val filtered = actorLoginOrder.filter(sqlFunc($"login"))
+
+    filtered.write.format(args(3)).save(args(2))
   }
 
 }
