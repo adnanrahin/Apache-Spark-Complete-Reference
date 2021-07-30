@@ -41,6 +41,14 @@ object CustomerTransaction {
 
     println("Customer ID: " + cid + " Purchase: " + numberOfPurchase)
 
+    var complementTransaction = Array(Array("2015-03-30", "11:59 PM", "53", "4", "1", "0.00"))
+
+    println("\n Transaction made by customer ID: 53")
+
+    val transactionMadeByCustomer = transactionByCustomer.lookup(53)
+
+    transactionMadeByCustomer.foreach(row => println(row.mkString("Array(", ", ", ")")))
+
   }
 
 }
