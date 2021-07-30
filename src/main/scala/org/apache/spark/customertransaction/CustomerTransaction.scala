@@ -43,11 +43,20 @@ object CustomerTransaction {
 
     var complementTransaction = Array(Array("2015-03-30", "11:59 PM", "53", "4", "1", "0.00"))
 
-    println("\n Transaction made by customer ID: 53")
+    println("\nTransaction made by customer ID: 53")
 
     val transactionMadeByCustomer = transactionByCustomer.lookup(53)
 
     transactionMadeByCustomer.foreach(row => println(row.mkString("Array(", ", ", ")")))
+
+    val transactionByCustomerUpdate = transactionByCustomer.mapValues(transaction => {
+      if (transaction(3).toInt == 25 && transaction(4).toDouble > 1) {
+        transaction(5) = (transaction(5).toDouble * 0.95).toString
+      }
+      transaction
+    })
+
+
 
   }
 
