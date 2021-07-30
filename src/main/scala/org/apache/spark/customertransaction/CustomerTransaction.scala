@@ -56,7 +56,23 @@ object CustomerTransaction {
       transaction
     })
 
+    transactionByCustomerUpdate.foreach(transaction => println(transaction._2.mkString("Array(", ", ", ")")))
 
+    val transactionByCustomerList =
+      transactionByCustomerUpdate.flatMapValues(transaction => {
+        if (transaction(3).toInt == 81 && transaction(4).toDouble >= 5) {
+          val cloned = transaction.clone()
+          cloned(5) = "0.00"
+          cloned(3) = "70"
+          cloned(4) = "1"
+          List(transaction, cloned)
+        }
+        else {
+          List(transaction)
+        }
+      })
+
+    transactionByCustomerList.foreach(row => println(row._2.mkString("(", ", ", ")")))
 
   }
 
