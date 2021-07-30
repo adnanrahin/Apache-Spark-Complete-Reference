@@ -1,4 +1,4 @@
-package org.apache.spark.githubarcheive
+package org.apache.spark.chapter_three
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession

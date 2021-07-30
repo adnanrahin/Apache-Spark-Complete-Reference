@@ -1,4 +1,4 @@
-package org.apache.spark.listhdfs
+package org.apache.spark.util
 
 import org.apache.hadoop.conf.Configuration
 import org.apache.hadoop.fs.{FileStatus, FileSystem, Path}
