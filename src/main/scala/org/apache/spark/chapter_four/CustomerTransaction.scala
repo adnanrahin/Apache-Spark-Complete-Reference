@@ -74,6 +74,10 @@ object CustomerTransaction {
 
     transactionByCustomerList.foreach(row => println(row._2.mkString("(", ", ", ")")))
 
+    val amounts = transactionByCustomerList.mapValues(t => t(5).toDouble)
+
+    val totals = amounts.foldByKey(0)((p1, p2) => p1 + p2).collect()
+
   }
 
 }
