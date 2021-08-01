@@ -74,9 +74,15 @@ object CustomerTransaction {
 
     transactionByCustomerList.foreach(row => println(row._2.mkString("(", ", ", ")")))
 
+    /** Converting amount that customer spend to Double and map them with customer ID**/
+
     val amounts = transactionByCustomerList.mapValues(t => t(5).toDouble)
 
+    /** Fold all the keys, where all the similar key will be merge**/
+
     val totals = amounts.foldByKey(0)((p1, p2) => p1 + p2).collect()
+
+    amounts.foreach(row => println(row))
 
   }
 
