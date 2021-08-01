@@ -21,18 +21,18 @@ object CustomerTransaction {
 
     val transactionData = transactionFile.map(_.split("#"))
 
-    transactionData.foreach(row => println(row.mkString("Array(", ", ", ")")))
+    // transactionData.foreach(row => println(row.mkString("Array(", ", ", ")")))
 
     val transactionByCustomer = transactionData.map(transaction => (transaction(2).toInt, transaction))
 
-    transactionByCustomer.foreach(row => println(row._2.mkString("Array(", ", ", ")")))
+    // transactionByCustomer.foreach(row => println(row._2.mkString("Array(", ", ", ")")))
 
     /** Creating new map to count number of transaction is completed by each customer* */
 
     val countTransactionByCustomer =
       transactionByCustomer.countByKey()
 
-    println(countTransactionByCustomer)
+    //println(countTransactionByCustomer)
 
     /** Find which customer made the most purchase* */
 
@@ -47,7 +47,7 @@ object CustomerTransaction {
 
     val transactionMadeByCustomer = transactionByCustomer.lookup(53)
 
-    transactionMadeByCustomer.foreach(row => println(row.mkString("Array(", ", ", ")")))
+    // transactionMadeByCustomer.foreach(row => println(row.mkString("Array(", ", ", ")")))
 
     val transactionByCustomerUpdate = transactionByCustomer.mapValues(transaction => {
       if (transaction(3).toInt == 25 && transaction(4).toDouble > 1) {
@@ -56,7 +56,7 @@ object CustomerTransaction {
       transaction
     })
 
-    transactionByCustomerUpdate.foreach(transaction => println(transaction._2.mkString("Array(", ", ", ")")))
+    // transactionByCustomerUpdate.foreach(transaction => println(transaction._2.mkString("Array(", ", ", ")")))
 
     val transactionByCustomerList =
       transactionByCustomerUpdate.flatMapValues(transaction => {
@@ -72,17 +72,17 @@ object CustomerTransaction {
         }
       })
 
-    transactionByCustomerList.foreach(row => println(row._2.mkString("(", ", ", ")")))
+    // transactionByCustomerList.foreach(row => println(row._2.mkString("(", ", ", ")")))
 
-    /** Converting amount that customer spend to Double and map them with customer ID**/
+    /** Converting amount that customer spend to Double and map them with customer ID* */
 
     val amounts = transactionByCustomerList.mapValues(t => t(5).toDouble)
 
-    /** Fold all the keys, where all the similar key will be merge**/
+    /** Fold all the keys, where all the similar key will be merge* */
 
     val totals = amounts.foldByKey(0)((p1, p2) => p1 + p2).collect()
 
-    amounts.foreach(row => println(row))
+    // totals.foreach(row => println(row))
 
   }
 
