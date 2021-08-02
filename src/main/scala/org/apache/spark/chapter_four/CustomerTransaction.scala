@@ -88,6 +88,14 @@ object CustomerTransaction {
 
     println("Customer ID: " + customerIdMost + " Total Money Spend: " + totalSpend)
 
+    complementTransaction = complementTransaction :+ Array("2015-03-30", "11:59 PM", "76", "63", "1", "0.00")
+
+    val parallelizedTransactionByCustomer =
+      transactionByCustomerList
+        .union(sc.parallelize(complementTransaction).map(t => (t(2).toInt, t)))
+
+    parallelizedTransactionByCustomer.foreach(row => println(row._2.mkString("Array(", ", ", ")")))
+
   }
 
 }
