@@ -84,6 +84,10 @@ object CustomerTransaction {
 
     // totals.foreach(row => println(row))
 
+    val (customerIdMost, totalSpend) = totals.sortBy(_._2).toSeq.last
+
+    println("Customer ID: " + customerIdMost + " Total Money Spend: " + totalSpend)
+
   }
 
 }
