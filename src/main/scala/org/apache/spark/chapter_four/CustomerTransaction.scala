@@ -17,7 +17,7 @@ object CustomerTransaction {
 
     val sc = spark.sparkContext
 
-    val transactionFile = sc.textFile("textdata/ch04_data_transactions.txt")
+    val transactionFile = sc.textFile(args(0))
 
     val transactionData = transactionFile.map(_.split("#"))
 
@@ -98,7 +98,7 @@ object CustomerTransaction {
 
     parallelizedTransactionByCustomer
       .map(t => t._2
-    .mkString("#"))
+        .mkString("#"))
       .saveAsTextFile("textdata/ch04outputtransByCust")
 
   }
