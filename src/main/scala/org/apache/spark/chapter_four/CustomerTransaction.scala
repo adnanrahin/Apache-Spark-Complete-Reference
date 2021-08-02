@@ -94,7 +94,12 @@ object CustomerTransaction {
       transactionByCustomerList
         .union(sc.parallelize(complementTransaction).map(t => (t(2).toInt, t)))
 
-    parallelizedTransactionByCustomer.foreach(row => println(row._2.mkString("Array(", ", ", ")")))
+    // parallelizedTransactionByCustomer.foreach(row => println(row._2.mkString("Array(", ", ", ")")))
+
+    parallelizedTransactionByCustomer
+      .map(t => t._2
+    .mkString("#"))
+      .saveAsTextFile("textdata/ch04outputtransByCust")
 
   }
 
