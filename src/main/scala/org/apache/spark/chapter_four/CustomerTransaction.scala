@@ -117,7 +117,13 @@ object CustomerTransaction {
 
     val transactionByProd = transactionData.map(transaction => (transaction(3).toInt, transaction))
 
-    transactionByProd.foreach(t => println(t._1))
+    /*transactionByProd.foreach(t => println(t._1 + " " + t._2.mkString("Array(", ", ", ")")))*/
+
+    val totalTransactionProd =
+      transactionByProd.mapValues(t => t(5).toDouble)
+        .reduceByKey { case (t1, t2) => t1 + t2 }
+
+    totalTransactionProd.foreach(t => println(t._1 + " " + t._2))
 
   }
 
