@@ -119,13 +119,28 @@ object CustomerTransaction {
 
     /*transactionByProd.foreach(t => println(t._1 + " " + t._2.mkString("Array(", ", ", ")")))*/
 
-    val totalTransactionProd =
+    val totalsByProd =
       transactionByProd.mapValues(t => t(5).toDouble)
         .reduceByKey { case (t1, t2) => t1 + t2 }
 
     /*totalTransactionProd.foreach(t => println(t._1 + " " + t._2))*/
 
     val products = sc.textFile(args(1))
+      .map(line => line.split("#"))
+      .map(p => (p(0).toInt, p))
+
+    /*products.foreach(p => println(p._1 + " " + p._2.mkString("Array(", ", ", ")")))*/
+
+    /*println(products.lookup(89).mkString("Array(", ", ", ")"))*/
+
+    /** Spark RDD Joins**/
+
+    val totalsAndProds = totalsByProd.join(products)
+
+    /**Left Outer Join**/
+
+    val totalsWithMissingProdsLeftOuterJoin = products.leftOuterJoin(totalsByProd)
+
 
   }
 
