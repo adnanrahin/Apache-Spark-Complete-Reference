@@ -115,6 +115,10 @@ object CustomerTransaction {
 
     println("Rdd Map Swap: " + rddMapSwap + " Rdd Map Reduce By Key: " + rddMapReduceByKey)
 
+    val transactionByProd = transactionData.map(transaction => (transaction(3).toInt, transaction))
+
+    transactionByProd.foreach(t => println(t._1))
+
   }
 
 }
