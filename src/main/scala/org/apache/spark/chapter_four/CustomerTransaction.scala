@@ -133,14 +133,24 @@ object CustomerTransaction {
 
     /*println(products.lookup(89).mkString("Array(", ", ", ")"))*/
 
-    /** Spark RDD Joins**/
+    /** Spark RDD Joins* */
 
     val totalsAndProds = totalsByProd.join(products)
 
-    /**Left Outer Join**/
+    /** Left Outer Join* */
 
     val totalsWithMissingProdsLeftOuterJoin = products.leftOuterJoin(totalsByProd)
+    val totalsWIthMissingProdsRightOuterJoin = totalsByProd.rightOuterJoin(products)
 
+    val missingProds = totalsWIthMissingProdsRightOuterJoin
+      .filter(x => x._2._1 == None)
+      .map(x => x._2._2)
+
+    missingProds.foreach(r => println(r.mkString("Array(", ", ", ")")))
+
+    /** Similar implementations* */
+
+    /*val missingProds = products.subtractByKey(totalsByProd).values*/
 
   }
 
