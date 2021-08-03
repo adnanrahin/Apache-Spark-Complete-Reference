@@ -123,7 +123,9 @@ object CustomerTransaction {
       transactionByProd.mapValues(t => t(5).toDouble)
         .reduceByKey { case (t1, t2) => t1 + t2 }
 
-    totalTransactionProd.foreach(t => println(t._1 + " " + t._2))
+    /*totalTransactionProd.foreach(t => println(t._1 + " " + t._2))*/
+
+    val products = sc.textFile(args(1))
 
   }
 
