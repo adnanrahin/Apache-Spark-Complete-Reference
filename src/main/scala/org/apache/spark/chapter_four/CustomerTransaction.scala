@@ -1,6 +1,7 @@
 package org.apache.spark.chapter_four
 
 import org.apache.log4j.{Level, Logger}
+import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
 
 object CustomerTransaction {
@@ -96,10 +97,23 @@ object CustomerTransaction {
 
     // parallelizedTransactionByCustomer.foreach(row => println(row._2.mkString("Array(", ", ", ")")))
 
-    parallelizedTransactionByCustomer
+    /*parallelizedTransactionByCustomer
       .map(t => t._2
         .mkString("#"))
-      .saveAsTextFile("textdata/ch04outputtransByCust")
+      .saveAsTextFile("textdata/ch04outputtransByCust")*/
+
+    val prods = parallelizedTransactionByCustomer.aggregateByKey(List[String]())(
+      (prods, tran) => prods ::: List(tran(3)),
+      (prods1, prods2) => prods1 ::: prods2
+    )
+
+    /** Shuffle caused by partitioner removal* */
+
+    val rdd: RDD[Int] = sc.parallelize(1 to 10000)
+    val rddMapSwap = rdd.map(x => (x, x * x)).map(_.swap).count()
+    val rddMapReduceByKey = rdd.map(x => (x, x * x)).reduceByKey((v1, v2) => v1 + v2).count()
+
+    println("Rdd Map Swap: " + rddMapSwap + " Rdd Map Reduce By Key: " + rddMapReduceByKey)
 
   }
 
