@@ -137,7 +137,7 @@ object CustomerTransaction {
 
     val totalsAndProds = totalsByProd.join(products)
 
-    /** Left Outer Join* */
+    /** Left Outer Join -> Finding product that no one bought* */
 
     val totalsWithMissingProdsLeftOuterJoin = products.leftOuterJoin(totalsByProd)
     val totalsWIthMissingProdsRightOuterJoin = totalsByProd.rightOuterJoin(products)
@@ -151,6 +151,24 @@ object CustomerTransaction {
     /** Similar implementations* */
 
     /*val missingProds = products.subtractByKey(totalsByProd).values*/
+
+    /** Finding the missing product using co-group */
+
+    val prodTotCoGroup = totalsByProd.cogroup(products)
+
+    val filterProdCoGroup = prodTotCoGroup
+      .filter(x => x._2._1.isEmpty)
+
+    /*filterProdCoGroup.foreach(x => println(x._2._2.head.mkString("Array(", ", ", ")")))*/
+
+    /** Finding product that not missing* */
+
+    val totalsAndProdsNotMissing = prodTotCoGroup.filter(x => x._2._1.nonEmpty).
+      map(x => (x._2._2.head(0).toInt, (x._2._1.head, x._2._2.head)))
+
+    /*totalsAndProdsNotMissing.foreach(x => println(x._2._2.head.mkString("Array(", ", ", ")")))*/
+
+    
 
   }
 
