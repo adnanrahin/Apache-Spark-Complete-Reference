@@ -178,6 +178,12 @@ object CustomerTransaction {
 
     println(cartesianProduct.mkString("Array(", ", ", ")"))
 
+    /** Sorting Data **/
+
+    val sortedProds = totalsAndProds.sortBy(_._2._2(1))
+
+    sortedProds.foreach(x => println(x._2._2.head.mkString("Array(", ", ", ")")))
+
   }
 
 }
