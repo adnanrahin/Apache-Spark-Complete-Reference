@@ -40,7 +40,7 @@ bin/
 .history
 .scala_dependencies
 .cache-main
-textdata/ch04outputtransByCust
+textdata/*
 
 #general
 *.class

@@ -182,14 +182,16 @@ object CustomerTransaction {
 
     val sortedProds = totalsAndProds.sortBy(_._2._2(1))
 
-    sortedProds.foreach(x => println(x._2._2.head.mkString("Array(", ", ", ")")))
+    /*sortedProds.foreach(x => println(x._2._2.head.mkString("Array(", ", ", ")")))*/
 
     /** Grouping data with the combineByKey transformation * */
 
-    def createComb = (t: Array[String]) => {
-      val total = t(5).toDouble
-      val q = t(4).toInt
-      (total / q, total / q, q, total)
+    def createComb: Array[String] => (Double, Double, Int, Double) = {
+      case (t) => {
+        val total = t(5).toDouble
+        val q = t(4).toInt
+        (total / q, total / q, q, total)
+      }
     }
 
     def mergeVal: ((Double, Double, Int, Double), Array[String]) => (Double, Double, Int, Double) = {
@@ -205,7 +207,14 @@ object CustomerTransaction {
         (scala.math.min(mn1, mn2), scala.math.max(mx1, mx2), c1 + c2, tot1 + tot2)
     }
 
+    val avgByCust = transactionByCustomer.combineByKey(createComb, mergeVal, mergeComb,
+      new org.apache.spark.HashPartitioner(transactionByCustomer.partitions.size)).
+      mapValues({ case (mn, mx, cnt, tot) => (mn, mx, cnt, tot, tot / cnt) })
+    avgByCust.first()
+
+    totalsAndProds.map(_._2).map(x => x._2.mkString("#") + ", " + x._1).saveAsTextFile("textdata/ch04output-totalsPerProd")
+    avgByCust.map { case (id, (min, max, cnt, tot, avg)) => "%d#%.2f#%.2f#%d#%.2f#%.2f".format(id, min, max, cnt, tot, avg) }
+      .saveAsTextFile("textdata/ch04output-avgByCust")
+
   }
-
-
 }
