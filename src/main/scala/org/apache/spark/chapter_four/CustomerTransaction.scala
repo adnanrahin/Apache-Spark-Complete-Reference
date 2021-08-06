@@ -178,12 +178,34 @@ object CustomerTransaction {
 
     println(cartesianProduct.mkString("Array(", ", ", ")"))
 
-    /** Sorting Data **/
+    /** Sorting Data * */
 
     val sortedProds = totalsAndProds.sortBy(_._2._2(1))
 
     sortedProds.foreach(x => println(x._2._2.head.mkString("Array(", ", ", ")")))
 
+    /** Grouping data with the combineByKey transformation * */
+
+    def createComb = (t: Array[String]) => {
+      val total = t(5).toDouble
+      val q = t(4).toInt
+      (total / q, total / q, q, total)
+    }
+
+    def mergeVal: ((Double, Double, Int, Double), Array[String]) => (Double, Double, Int, Double) = {
+      case ((mn, mx, c, tot), t) => {
+        val total = t(5).toDouble
+        val q = t(4).toInt
+        (scala.math.min(mn, total / q), scala.math.max(mx, total / q), c + q, tot + total)
+      }
+    }
+
+    def mergeComb: ((Double, Double, Int, Double), (Double, Double, Int, Double)) => (Double, Double, Int, Double) = {
+      case ((mn1, mx1, c1, tot1), (mn2, mx2, c2, tot2)) =>
+        (scala.math.min(mn1, mn2), scala.math.max(mx1, mx2), c1 + c2, tot1 + tot2)
+    }
+
   }
+
 
 }
