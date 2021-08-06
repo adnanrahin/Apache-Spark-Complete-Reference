@@ -168,7 +168,15 @@ object CustomerTransaction {
 
     /*totalsAndProdsNotMissing.foreach(x => println(x._2._2.head.mkString("Array(", ", ", ")")))*/
 
-    
+
+    /** RDD Cartesian Transformation* */
+
+    val rdd1 = sc.parallelize(List(7, 8, 9))
+    val rdd2 = sc.parallelize(List(1, 2, 3))
+
+    val cartesianProduct = rdd1.cartesian(rdd2).collect()
+
+    println(cartesianProduct.mkString("Array(", ", ", ")"))
 
   }
 
