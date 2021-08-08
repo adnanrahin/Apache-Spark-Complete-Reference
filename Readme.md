@@ -26,6 +26,17 @@ A single unit of work or execution that will be sent to a Spark executor.
 
 1. Transformations: as the name suggests, transform a Spark DataFrame
 into a new DataFrame without altering the original data, giving it the property of
-immutability.
+immutability. Transformations can be classified as having either narrow dependencies or wide dependencies.
+     1. Any transformation where a single output partition can be computed
+        from a single input partition is a narrow transformation. For example, in the previous
+        code snippet, filter() and contains() represent narrow transformations because
+        they can operate on a single partition and produce the resulting output partition
+        without any exchange of data.
+     2. However, groupBy() or orderBy() instruct Spark to perform wide transformations,
+        where data from other partitions is read in, combined, and written to disk. Since each
+        partition will have its own count of the word that contains the “Spark” word in its row
+        of data, a count (groupBy()) will force a shuffle of data from each of the executor’s
+        partitions across the cluster. In this transformation, orderBy() requires to be output from
+        other partitions to compute the final aggregation.
 2. 
 
