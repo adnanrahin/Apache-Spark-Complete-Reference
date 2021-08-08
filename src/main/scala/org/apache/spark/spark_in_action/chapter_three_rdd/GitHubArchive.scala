@@ -1,4 +1,4 @@
-package org.apache.spark.spark_in_action.chapter_three
+package org.apache.spark.spark_in_action.chapter_three_rdd
 
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.sql.SparkSession
