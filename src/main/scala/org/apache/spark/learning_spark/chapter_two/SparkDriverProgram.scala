@@ -9,12 +9,12 @@ object SparkDriverProgram {
     val spark = SparkSession
       .builder()
       .master("local[*]")
-      .appName("GitHubArchive")
+      .appName("SparkDriverProgram")
       .getOrCreate()
 
     val sc = spark.sparkContext
 
-
+    
 
   }
 }
