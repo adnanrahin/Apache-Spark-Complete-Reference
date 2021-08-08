@@ -12,5 +12,9 @@ object SparkDriverProgram {
       .appName("GitHubArchive")
       .getOrCreate()
 
+    val sc = spark.sparkContext
+
+
+
   }
 }
