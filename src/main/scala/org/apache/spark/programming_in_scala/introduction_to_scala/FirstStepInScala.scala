@@ -44,6 +44,24 @@ object FirstStepInScala {
      * print(greetStrings.apply(i))
      * */
 
+    /** Scala List */
+
+    val onwTwo = List(1, 2)
+    val threeFour = List(3, 4)
+    val addLists = onwTwo ::: threeFour
+    println(addLists)
+
+    val addElemToList = 10 :: threeFour
+    println(addElemToList)
+
+    val anotherWay = 1 :: 2 :: 3 :: Nil
+    println(anotherWay)
+
+    /** Tuples in Scala*/
+
+    val pair = (1000, "Megatron")
+    println(pair._1 + " " + pair._2)
+    
   }
 
 }
