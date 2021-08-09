@@ -1,6 +1,7 @@
 package org.apache.spark.programming_in_scala.introduction_to_scala
 
 import java.math.BigInteger
+import scala.collection.mutable
 
 object FirstStepInScala {
 
@@ -57,11 +58,34 @@ object FirstStepInScala {
     val anotherWay = 1 :: 2 :: 3 :: Nil
     println(anotherWay)
 
-    /** Tuples in Scala*/
+    /** Tuples in Scala */
 
     val pair = (1000, "Megatron")
     println(pair._1 + " " + pair._2)
-    
+
+    /** Scala Set */
+
+    var jetSet = Set("Boeing", "Airbus")
+    jetSet += "Lear"
+    println(jetSet.contains("Cessna") + " " + jetSet.contains("Boeing"))
+    println(jetSet.getClass)
+
+    /** Scala Mutable Map */
+    val treasureMap = mutable.Map[Int, String]()
+    treasureMap += (1 -> "Go to island.")
+    treasureMap += (2 -> "Find big X on ground.")
+    treasureMap += (3 -> "Dig.")
+    println(treasureMap(2))
+    println(treasureMap.getClass)
+
+    /** Scala Immutable Map */
+    val romanNumeral = Map(
+      1 -> "I", 2 -> "II", 3 -> "III", 4 -> "IV", 5 -> "V"
+    )
+    println(romanNumeral(4))
+    println(romanNumeral.getClass)
+
+
   }
 
 }
