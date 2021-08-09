@@ -1,7 +1,7 @@
 package org.apache.spark.learning_spark.chapter_two
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.column
+import org.apache.spark.sql.functions.{column, count, desc}
 
 object SparkDriverProgram {
 
@@ -34,13 +34,28 @@ object SparkDriverProgram {
     println(mnmDf.show(5))
 
     /**
-     *  Aggregate counts of all colors and groupBy() state and Color
-     *  OrderBy() in descending order
+     * Aggregate counts of all colors and groupBy() state and Color
+     * OrderBy() in descending order
      * */
 
     val countMndMDF = mnmDf
       .select(column("State"), column("Color"), column("Count"))
+      .groupBy("State", "Color")
+      .agg(count("Count").alias("Total"))
+      .orderBy(desc("Total"))
 
+    println(countMndMDF.show(5))
+
+    val caCountMnMDS = mnmDf
+      .select("State", "Color", "Count")
+      .where(column("State") === "CA")
+      .groupBy("State", "Color")
+      .agg(count("Count").alias("Total"))
+      .orderBy(desc("Total"))
+
+    println(caCountMnMDS.show(10))
+
+    spark.stop()
 
   }
 }
