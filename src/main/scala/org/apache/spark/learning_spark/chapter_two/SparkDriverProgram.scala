@@ -14,7 +14,19 @@ object SparkDriverProgram {
 
     val sc = spark.sparkContext
 
-    println("MY Name Is Rahin")
+    if (args.length < 1) {
+      print("Usage: MnMcount <mnm_file_dataset>")
+      sys.exit(1)
+    }
+
+    val mnmFile = args(0)
+
+    val mnmDf = spark.read.format("csv")
+      .option("header", "true")
+      .option("inferSchema", "true")
+      .load(mnmFile)
+
+    println(mnmDf.show(5))
 
   }
 }
