@@ -50,7 +50,7 @@
 
     </dependencies>
 
-    <build>
+    <!--<build>
         <sourceDirectory>src/main/scala</sourceDirectory>
         <plugins>
 
@@ -88,5 +88,5 @@
             </plugin>
 
         </plugins>
-    </build>
+    </build>-->
 </project>
