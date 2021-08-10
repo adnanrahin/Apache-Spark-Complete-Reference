@@ -1,4 +1,4 @@
-package org.apache.spark.programming_in_scala.introduction_to_scala
+package org.programming.scala.introduction
 
 import java.math.BigInteger
 import scala.collection.mutable
