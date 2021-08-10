@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>Spark-In-Action</artifactId>
+    <artifactId>apache-spark-complete-reference</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
@@ -14,7 +14,7 @@
         <module>learning-spark</module>
     </modules>
 
-    <name>Apache-Spark-Complete-Reference</name>
+    <name>apache-spark-complete-reference</name>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

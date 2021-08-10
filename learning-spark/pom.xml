@@ -8,7 +8,7 @@
 
     <parent>
         <groupId>org.example</groupId>
-        <artifactId>Spark-In-Action</artifactId>
+        <artifactId>apache-spark-complete-reference</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 

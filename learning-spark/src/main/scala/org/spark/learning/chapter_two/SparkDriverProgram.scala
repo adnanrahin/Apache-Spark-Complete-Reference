@@ -7,6 +7,11 @@ object SparkDriverProgram {
 
   def main(args: Array[String]): Unit = {
 
+    /**
+     *
+     * args(0) -> datasource/mnm_dataset.csv
+     * */
+
     val spark = SparkSession
       .builder()
       .master("local[*]")
