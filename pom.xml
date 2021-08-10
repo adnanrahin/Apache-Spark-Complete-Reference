@@ -12,6 +12,7 @@
         <module>programming-in-scala</module>
         <module>spark-in-action</module>
         <module>learning-spark</module>
+        <module>spark-definitive-guide</module>
     </modules>
 
     <name>apache-spark-complete-reference</name>
