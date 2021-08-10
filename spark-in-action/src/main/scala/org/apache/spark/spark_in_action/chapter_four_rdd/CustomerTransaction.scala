@@ -8,6 +8,14 @@ object CustomerTransaction {
 
   def main(args: Array[String]): Unit = {
 
+    /**
+     *  Input Parameters
+     *
+     * args(0) -> textdata\ch04_data_transactions.txt
+     * args(1) -> textdata\ch04_data_products.txt
+     *
+     * */
+
     Logger.getLogger("org").setLevel(Level.ERROR)
 
     val spark = SparkSession

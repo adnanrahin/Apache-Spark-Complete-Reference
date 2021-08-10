@@ -1,4 +1,4 @@
-package org.apache.spark.learning_spark.chapter_two
+package org.spark.learning.chapter_two
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{column, count, desc}
