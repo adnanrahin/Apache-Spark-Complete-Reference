@@ -10,6 +10,14 @@ object GitHubArchive {
 
   def main(args: Array[String]): Unit = {
 
+    /**
+     *
+     *  args(0) -> hdfs://localhost:9000/datasource/*.json **/
+     *  args(1) -> textdata\ghEmployees.txt
+     *  args(2) -> git-out-put
+     *
+     * */
+
     Logger.getLogger("org").setLevel(Level.ERROR)
 
     val spark = SparkSession
