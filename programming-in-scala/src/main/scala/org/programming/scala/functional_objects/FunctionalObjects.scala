@@ -16,6 +16,12 @@ object FunctionalObjects {
         numer * that.denom + that.numer * denom,
         denom * that.denom
       )
+
+    def lessThan(that: Rational): Boolean =
+      this.numer * that.denom < that.numer * this.denom
+
+    def max(that: Rational): Rational =
+      if (this.lessThan(that)) that else this
   }
 
   def main(args: Array[String]): Unit = {
