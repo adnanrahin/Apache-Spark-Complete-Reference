@@ -37,4 +37,6 @@ object ControlAbstraction {
 
   def filesEnding(query: String): Array[File] = filesMatching(query, _.endsWith(_))
 
+  def filesContaining(query: String): Array[File] = filesMatching(query, _.contains(_))
+
 }
