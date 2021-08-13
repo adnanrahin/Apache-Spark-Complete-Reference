@@ -7,6 +7,7 @@ object SortNDArrays {
     val sortedList = sortWithPatternMatching(Array(5, 6, 7, 3))
 
     println(sortedList)
+    println(sortedList.getClass)
   }
 
   def sortWithPatternMatching(anyArray: Array[Integer]): Any = {
