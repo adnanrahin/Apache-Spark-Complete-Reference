@@ -10,14 +10,21 @@ object CaseClassMatchExpression {
 
   case class Fish(name: String) extends Animal
 
+  case class Bug(name: String) extends Animal
+
   def main(args: Array[String]): Unit = {
 
     val mammal =  Mammal("Shark", fromSea = true)
 
     val getDescription = caseClassPatternMatchExpression(mammal)
 
-    println(getDescription.substring(10))
+    println(getDescription)
 
+    val bird = Bird("Humming Bird")
+    println(caseClassPatternMatchExpression(bird))
+
+    val bug = Bug("Butterfly")
+    println(caseClassPatternMatchExpression(bug))
   }
 
   def caseClassPatternMatchExpression(animal: Animal): String = {
