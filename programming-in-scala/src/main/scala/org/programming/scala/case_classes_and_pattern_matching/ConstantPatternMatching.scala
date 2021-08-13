@@ -5,7 +5,6 @@ object ConstantPatternMatching {
   def main(args: Array[String]): Unit = {
 
     val one = constantsPatternMatching("One")
-
     println(one)
 
     val two = constantsPatternMatching("two")
