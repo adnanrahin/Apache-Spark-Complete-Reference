@@ -24,11 +24,13 @@ object CaseClassPatternMatching {
     val five = describe(5)
     println(five)
 
-    val hello = describe("hello")
-    println(hello)
+    val hello = describe("Hello")
+    println(hello.toString.substring(0, 5))
 
     val trueVal = describe(false)
-    println(trueVal)
+    if (trueVal == true) {
+      println(trueVal)
+    } else println(trueVal + " Became False")
 
     val getNullPointerException = describe(Nil)
     println(getNullPointerException)
@@ -41,12 +43,30 @@ object CaseClassPatternMatching {
     case _ => expr
   }
 
-  def describe(x: Any): Any = x match{
+  def describe(x: Any): Any = x match {
     case 5 => "Five"
     case true => true
     case "Hello" => "Hello String"
     case Nil => "Null"
     case _ => "Something Else"
+  }
+
+  def generalizedSize(x: Any): Int = x match {
+    case s: String => s.length
+    case m: Map[_, _] => m.size
+  }
+
+  def regexPatterns(toMatch: String): String = {
+    val numeric = """([0-9]+)""".r
+    val alphabetic = """([a-zA-Z]+)""".r
+    val alphanumeric = """([a-zA-Z0-9]+)""".r
+
+    toMatch match {
+      case numeric(value) => s"I'm a numeric with value $value"
+      case alphabetic(value) => s"I'm an alphabetic with value $value"
+      case alphanumeric(value) => s"I'm an alphanumeric with value $value"
+      case _ => s"I contain other characters than alphanumerics. My value $toMatch"
+    }
   }
 
 }
