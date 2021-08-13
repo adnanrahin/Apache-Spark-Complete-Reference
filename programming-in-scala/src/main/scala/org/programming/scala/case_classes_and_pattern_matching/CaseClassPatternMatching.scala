@@ -69,4 +69,12 @@ object CaseClassPatternMatching {
     }
   }
 
+  def patternMatching(candidate: String): Int = {
+    candidate match {
+      case "One" => 1
+      case "Two" => 2
+      case _ => -1
+    }
+  }
+
 }
