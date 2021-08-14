@@ -18,6 +18,7 @@ object SortNDArrays {
     val getSortedStringList = sortWithPatternMatching(List("Mechanics", "Prime", "Number", "Pattern", "Romeo"))
     println(getSortedStringList)
     println(getSortedStringList.getClass)
+
   }
 
   def sortWithPatternMatching(anyArray: Any): Any = {
