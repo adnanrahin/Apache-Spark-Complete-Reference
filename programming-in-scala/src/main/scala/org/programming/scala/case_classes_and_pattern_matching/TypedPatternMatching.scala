@@ -9,7 +9,7 @@ object TypedPatternMatching {
 
     val getPatternList = typedPatternMatching(List(1, 3, 4, 5, 5))
     println(getPatternList)
-    
+
   }
 
   def typedPatternMatching(value: Any): String = {
