@@ -3,25 +3,25 @@ package org.programming.scala.working_with_lists
 object ListLiterals {
 
   def main(args: Array[String]): Unit = {
-
-    println(appendListValues(List("Transformer", "Cybertruck", "Audi")))
-    println(appendListValues(List(1, 2, 3)))
+    
+    val getString = appendListValues(List("Transformer", "Cybertruck", "Audi"))
+    println(getString)
+    val getPatternList = appendListValues(List(13, 4, 5, 56))
+    println(getPatternList)
 
   }
 
-  def appendListValues(list: List[Any]): List[Any] = {
-
-    list match {
-      case x: List[String] => {
-        val newList = x.map(str => str + "a")
-        newList
+  def appendListValues(value: Any): Any = {
+    value match {
+      case x: List[Any] => {
+        x match {
+          case f: List[String] => "String"
+          case f: List[Int] => "Integer"
+          case _ => "Desktop"
+        }
       }
-      case x: List[Integer] => {
-        val newList = x.map(value => value + 1)
-        newList
-      }
-      case _ => Nil
     }
+
   }
 
 }
