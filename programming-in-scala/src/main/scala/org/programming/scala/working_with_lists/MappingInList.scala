@@ -1,6 +1,6 @@
 package org.programming.scala.working_with_lists
 
-object HigherOrderMethod {
+object MappingInList {
 
   def main(args: Array[String]): Unit = {
 
