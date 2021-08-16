@@ -11,6 +11,8 @@ object FilterInList {
     println("Odd :" + odd)
     println("Even " + even)
 
+    println(reduceFromLeft(List(3, 4, 56, 8)))
+
   }
 
   def filterEvenNumbers(list: List[Int]): List[Int] = {
@@ -22,6 +24,14 @@ object FilterInList {
 
   def listPartition(list: List[Int]): (List[Int], List[Int]) = {
     list.partition(_ % 2 == 0)
+  }
+
+  def reduceFromLeft(list: List[Int]): Int = {
+
+    def findMaxValue(a: Int, b: Int): Int = if (a > b) a else b
+
+    list.reduceLeft(findMaxValue)
+
   }
 
 }
