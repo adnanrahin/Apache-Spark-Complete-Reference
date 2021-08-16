@@ -3,7 +3,7 @@ package org.programming.scala.working_with_lists
 object ListLiterals {
 
   def main(args: Array[String]): Unit = {
-    
+
     val getString = appendListValues(List("Transformer", "Cybertruck", "Audi"))
     println(getString)
     val getPatternList = appendListValues(List(13, 4, 5, 56))
