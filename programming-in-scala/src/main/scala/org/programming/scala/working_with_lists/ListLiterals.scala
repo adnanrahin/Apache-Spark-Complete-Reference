@@ -4,7 +4,8 @@ object ListLiterals {
 
   def main(args: Array[String]): Unit = {
 
-      println(appendListValues(List("Transformer", "Cybertruck", "Audi")))
+    println(appendListValues(List("Transformer", "Cybertruck", "Audi")))
+    println(appendListValues(List(1, 2, 3)))
 
   }
 
@@ -21,7 +22,6 @@ object ListLiterals {
       }
       case _ => Nil
     }
-
   }
 
 }
