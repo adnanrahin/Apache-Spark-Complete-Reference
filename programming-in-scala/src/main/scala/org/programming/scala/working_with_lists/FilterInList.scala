@@ -13,6 +13,8 @@ object FilterInList {
 
     println(reduceFromLeft(List(3, 4, 56, 8)))
 
+    println(reduceString(List("ami", "b", "cb", "alpha")))
+
   }
 
   def filterEvenNumbers(list: List[Int]): List[Int] = {
@@ -31,6 +33,12 @@ object FilterInList {
     def findMaxValue(a: Int, b: Int): Int = if (a > b) a else b
 
     list.reduceLeft(findMaxValue)
+
+  }
+
+  def reduceString(strs: List[String]): List[String] = {
+
+    strs.scanLeft("")((x, y) => if(x.startsWith("a") && y.endsWith("b")) (x + y) else (x + "  |  " + y))
 
   }
 
