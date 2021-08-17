@@ -12,7 +12,6 @@ object FilterInList {
     println("Even " + even)
 
     println(reduceFromLeft(List(3, 4, 56, 8)))
-
     println(reduceString(List("ami", "b", "cb", "alpha")))
 
   }
