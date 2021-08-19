@@ -23,6 +23,8 @@ object SparkRddIntro {
 
     rdd1.foreach(r => println(r._1 + " " + r._2))
 
+    rdd2.foreach(r => println(r._1 + " " + r._2))
+
   }
 
 }
