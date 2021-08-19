@@ -21,6 +21,8 @@ object SparkRddIntro {
     val rdd1: RDD[(Int, String)] = sc.parallelize(list1)
     val rdd2: RDD[(Int, Int)] = sc.parallelize(list2)
 
+    rdd1.foreach(r => println(r._1 + " " + r._2))
+
   }
 
 }
