@@ -10,7 +10,7 @@ object SparkRddIntro {
     val spark = SparkSession
       .builder()
       .master("local[*]")
-      .appName("CustomerTransaction")
+      .appName("SparkRddIntro")
       .getOrCreate()
 
     val sc = spark.sparkContext
