@@ -13,6 +13,7 @@
         <module>spark-in-action</module>
         <module>learning-spark</module>
         <module>spark-definitive-guide</module>
+        <module>spark-by-example</module>
     </modules>
 
     <name>apache-spark-complete-reference</name>
