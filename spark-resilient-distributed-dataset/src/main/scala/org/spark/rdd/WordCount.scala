@@ -30,6 +30,12 @@ object WordCount {
 
     countAContainsRddFrequency.foreach(f => println(f))
 
+    /** @example sort rdd by key*/
+
+    val sortedWordFrequency = wordFrequency.sortByKey()
+
+    sortedWordFrequency.foreach(println)
+
   }
 
 }
