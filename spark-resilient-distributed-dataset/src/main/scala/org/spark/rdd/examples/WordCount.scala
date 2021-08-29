@@ -1,4 +1,4 @@
-package org.spark.rdd
+package org.spark.rdd.examples
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
@@ -30,7 +30,7 @@ object WordCount {
 
     countAContainsRddFrequency.foreach(f => println(f))
 
-    /** @example sort rdd by key*/
+    /** @example sort rdd by key */
 
     val sortedWordFrequency = wordFrequency.sortByKey()
 
