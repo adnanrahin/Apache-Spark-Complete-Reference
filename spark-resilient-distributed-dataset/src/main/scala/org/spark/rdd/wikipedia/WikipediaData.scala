@@ -5,7 +5,7 @@ import scala.io.Source
 object WikipediaData {
 
   private[wikipedia] def lines: List[String] = {
-    Option(getClass.getResourceAsStream("/wikipedia/wikipedia.dat")) match {
+    Option(getClass.getResourceAsStream("data/wikipedia.dat")) match {
       case None => sys.error("Please download the dataset as explained in the assignment instructions")
       case Some(resource) => Source.fromInputStream(resource).getLines().toList
     }
