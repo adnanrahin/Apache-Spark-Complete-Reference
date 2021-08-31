@@ -25,6 +25,7 @@ build/
 .worksheet
 bin/
 .cache
+spark-resilient-distributed-dataset/src/main/resources/wikipedia/wikipedia.dat
 
 # intellij idea
 *.log
