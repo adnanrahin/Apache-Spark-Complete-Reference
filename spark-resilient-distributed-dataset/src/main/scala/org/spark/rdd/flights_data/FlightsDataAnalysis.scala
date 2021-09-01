@@ -56,7 +56,7 @@ object FlightsDataAnalysis {
 
   def getAllDelayedFlightsFromOrigin(origin: String, flightsRdd: RDD[Flight]): RDD[(String, List[Flight])] = {
     flightsRdd
-      .filter(flight => flight.origin.equals("ABQ") && flight.delay.toInt < 0)
+      .filter(flight => flight.origin.equals(origin) && flight.delay.toInt > 0)
       .groupBy(_.origin)
       .map(iter => (iter._1, iter._2.toList))
   }
