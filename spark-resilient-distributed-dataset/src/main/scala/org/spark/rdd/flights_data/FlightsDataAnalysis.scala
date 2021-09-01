@@ -36,21 +36,29 @@ object FlightsDataAnalysis {
 
     /** @todo find all the flights from ABE -> ATL */
 
-    val allFlightsFromAbeToAtl: RDD[Flight] = flightsRdd
-      .filter(flight => flight.origin.equals("ABE") && flight.destination.equals("ATL"))
-
-    // allFlightsFromAbeToAtl.foreach(row => println(row))
+    val allFlightsFromAbeToAtl: RDD[Flight] =
+      getAllFlightsFromOriginToDestination("ABE", "ATL", flightsRdd)
 
     /** @todo find all the flights that delayed origin ABQ */
 
-    val allDelayedABQFlights: RDD[(String, List[Flight])] = flightsRdd
-      .filter(flight => flight.origin.equals("ABQ") && flight.delay.toInt < 0)
-      .groupBy(_.origin).map(iter => (iter._1, iter._2.toList))
-
-    println(allDelayedABQFlights.getClass)
+    val allDelayedABQFlights: RDD[(String, List[Flight])] =
+      getAllDelayedFlightsFromOrigin("ABQ", flightsRdd)
 
     allDelayedABQFlights.foreach(row => println(row._1 + " " + row._2))
 
+  }
+
+  def getAllFlightsFromOriginToDestination(origin: String, destination: String, flightsRdd: RDD[Flight]): RDD[Flight] = {
+    flightsRdd
+      .filter(flight =>
+        flight.origin.equals(origin) && flight.destination.equals(destination))
+  }
+
+  def getAllDelayedFlightsFromOrigin(origin: String, flightsRdd: RDD[Flight]): RDD[(String, List[Flight])] = {
+    flightsRdd
+      .filter(flight => flight.origin.equals("ABQ") && flight.delay.toInt < 0)
+      .groupBy(_.origin)
+      .map(iter => (iter._1, iter._2.toList))
   }
 
 }
