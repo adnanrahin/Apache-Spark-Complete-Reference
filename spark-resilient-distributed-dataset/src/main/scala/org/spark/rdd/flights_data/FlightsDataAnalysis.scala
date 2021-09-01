@@ -25,7 +25,7 @@ object FlightsDataAnalysis {
       .map(str => Flight(str(0), str(1), str(2), str(3), str(4))).mapPartitionsWithIndex {
       (idx, iter) => if (idx == 0) iter.drop(1) else iter
     }
-    
+
     /** @todo find all the flights from ABE -> ATL */
 
     val allFlightsFromAbeToAtl: RDD[Flight] = flightsRdd
