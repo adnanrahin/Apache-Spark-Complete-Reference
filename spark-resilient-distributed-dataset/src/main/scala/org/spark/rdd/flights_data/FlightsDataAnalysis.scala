@@ -44,7 +44,7 @@ object FlightsDataAnalysis {
     val allDelayedABQFlights: RDD[(String, List[Flight])] =
       getAllDelayedFlightsFromOrigin("ABQ", flightsRdd)
 
-    allDelayedABQFlights.foreach(row => println(row._1 + " " + row._2))
+    // allDelayedABQFlights.foreach(row => println(row._1 + " " + row._2))
 
   }
 
