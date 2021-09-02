@@ -1,5 +1,7 @@
 package org.flight.analysis
 
+import org.apache.spark.sql.SparkSession
+
 object FlightDelaysAndCancellations {
 
   case class Airport(iataCode: String,
@@ -23,6 +25,14 @@ object FlightDelaysAndCancellations {
 
   def main(args: Array[String]): Unit = {
 
+    val spark = SparkSession
+      .builder()
+      .master("local[*]")
+      .getOrCreate()
+
+    val sc = spark.sparkContext
+
+    
 
   }
 
