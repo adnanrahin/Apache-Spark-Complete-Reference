@@ -40,13 +40,16 @@ object FlightDelaysAndCancellations {
     val airlineCsv = sc.textFile("datasource/2015_flights_data/airlines.csv")
     val airportCsv = sc.textFile("datasource/2015_flights_data/airports.csv")
 
-    val flightsRDD = loadFlightCsvToRDD(flightsCsv)
+    val flightsRDD: RDD[Flight] = loadFlightCsvToRDD(flightsCsv)
+    val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
+
+    airlineRDD.foreach(row => println(row))
 
   }
 
-  def loadFlightCsvToRDD(flightsCsvRead: RDD[String]): RDD[Flight] = {
+  def loadFlightCsvToRDD(flightsCsv: RDD[String]): RDD[Flight] = {
     val flightsRDD: RDD[Flight] =
-      flightsCsvRead
+      flightsCsv
         .map(row => row.split(",", -1))
         .map(str => Flight(str(0),
           str(1), str(2), str(3), str(4), str(5), str(6),
@@ -57,6 +60,17 @@ object FlightDelaysAndCancellations {
         (idx, iter) => if (idx == 0) iter.drop(1) else iter
       }
     flightsRDD
+  }
+
+  def loadAirlineToRDD(airlineCSV: RDD[String]): RDD[Airline] = {
+    val airlineRDD: RDD[Airline] =
+      airlineCSV
+        .map(row => row.split(",", -1))
+        .map(str => Airline(str(0), str(1))).mapPartitionsWithIndex {
+        (idx, iter) => if (idx == 0) iter.drop(1) else iter
+      }
+
+    airlineRDD
   }
 
 }
