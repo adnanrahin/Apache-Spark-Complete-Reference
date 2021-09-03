@@ -42,8 +42,9 @@ object FlightDelaysAndCancellations {
 
     val flightsRDD: RDD[Flight] = loadFlightCsvToRDD(flightsCsv)
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
+    val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
-    airlineRDD.foreach(row => println(row))
+
 
   }
 
@@ -59,6 +60,7 @@ object FlightDelaysAndCancellations {
           str(24), str(25), str(26), str(27), str(28), str(29), str(30))).mapPartitionsWithIndex {
         (idx, iter) => if (idx == 0) iter.drop(1) else iter
       }
+
     flightsRDD
   }
 
