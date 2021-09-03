@@ -36,10 +36,18 @@ object FlightDelaysAndCancellations {
 
     val sc = spark.sparkContext
 
-    val flightsCsvRead = sc.textFile("datasource/2015_flights_data/flights.csv")
+    val flightsCsv = sc.textFile("datasource/2015_flights_data/flights.csv")
+    val airlineCsv = sc.textFile("datasource/2015_flights_data/airlines.csv")
+    val airportCsv = sc.textFile("datasource/2015_flights_data/airports.csv")
 
+    val flightsRDD = loadFlightCsvToRDD(flightsCsv)
+
+  }
+
+  def loadFlightCsvToRDD(flightsCsvRead: RDD[String]): RDD[Flight] = {
     val flightsRDD: RDD[Flight] =
-      flightsCsvRead.map(row => row.split(",", -1))
+      flightsCsvRead
+        .map(row => row.split(",", -1))
         .map(str => Flight(str(0),
           str(1), str(2), str(3), str(4), str(5), str(6),
           str(7), str(8), str(9), str(10), str(1), str(12),
@@ -48,9 +56,7 @@ object FlightDelaysAndCancellations {
           str(24), str(25), str(26), str(27), str(28), str(29), str(30))).mapPartitionsWithIndex {
         (idx, iter) => if (idx == 0) iter.drop(1) else iter
       }
-
-    flightsRDD.foreach(row => println(row))
-
+    flightsRDD
   }
 
 }
