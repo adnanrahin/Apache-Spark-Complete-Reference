@@ -45,6 +45,10 @@ object FlightDelaysAndCancellations {
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
 
+    val groupAllAirportsByCountry = airportRDD
+      .filter(airport => airport.country.equals("USA"))
+
+
 
   }
 
