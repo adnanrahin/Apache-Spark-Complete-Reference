@@ -46,7 +46,7 @@ object FlightDelaysAndCancellations {
 
     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
-    val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight)
+    val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
 
     airlinesCancelledNumberOfFlights.foreach(f => println(f))
 
@@ -98,11 +98,21 @@ object FlightDelaysAndCancellations {
     cancelledFlight
   }
 
-  def findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight: RDD[Flight]): List[(String, Int)] = {
+  def findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight: RDD[Flight], airlineRDD: RDD[Airline]): List[(String, Int)] = {
+    val lookupMAP =
+      airlineRDD.map(f => (f.iataCode, f.airlineName)).collectAsMap()
+
     val airlinesCancelledFlights =
       cancelledFlight
         .groupBy(_.airline)
-        .map(iter => (iter._1, iter._2.toList.size)).collect().toList
+        .map { iter =>
+          lookupMAP.get(iter._1) match {
+            case Some(value) => (value, iter._2.toList.size)
+            case None => ("Flight IATA Code is wrong", iter._2.toList.size)
+          }
+        }
+        .collect()
+        .toList
 
     airlinesCancelledFlights
   }
