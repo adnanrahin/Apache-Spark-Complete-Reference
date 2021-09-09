@@ -44,9 +44,8 @@ object FlightDelaysAndCancellations {
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
-    val cancelledFlight = findAllTheFlightsGetCancelled(flightsRDD)
+    val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
-    cancelledFlight.foreach(row => println(row))
 
   }
 
@@ -94,6 +93,10 @@ object FlightDelaysAndCancellations {
       flightsRDD.filter(flight => flight.cancelled.equals("1"))
 
     cancelledFlight
+  }
+
+  def findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight: RDD[Flight]): (String, Int) = {
+    null
   }
 
 }
