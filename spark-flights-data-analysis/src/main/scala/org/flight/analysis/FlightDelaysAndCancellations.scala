@@ -46,6 +46,9 @@ object FlightDelaysAndCancellations {
 
     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
+    val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight)
+
+    airlinesCancelledNumberOfFlights.foreach(f => println(f))
 
   }
 
@@ -95,8 +98,13 @@ object FlightDelaysAndCancellations {
     cancelledFlight
   }
 
-  def findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight: RDD[Flight]): (String, Int) = {
-    null
+  def findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight: RDD[Flight]): List[(String, Int)] = {
+    val airlinesCancelledFlights =
+      cancelledFlight
+        .groupBy(_.airline)
+        .map(iter => (iter._1, iter._2.toList.size)).collect().toList
+
+    airlinesCancelledFlights
   }
 
 }
