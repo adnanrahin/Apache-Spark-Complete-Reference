@@ -31,6 +31,7 @@ object FlightDelaysAndCancellations {
 
     val spark = SparkSession
       .builder()
+      .appName("FlightDelaysAndCancellations")
       .master("local[*]")
       .getOrCreate()
 
