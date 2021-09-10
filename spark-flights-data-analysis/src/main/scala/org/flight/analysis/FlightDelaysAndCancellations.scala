@@ -105,7 +105,9 @@ object FlightDelaysAndCancellations {
 
   def findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight: RDD[Flight], airlineRDD: RDD[Airline]): List[(String, Int)] = {
     val lookupMAP =
-      airlineRDD.map(f => (f.iataCode, f.airlineName)).collectAsMap()
+      airlineRDD.map(f => (f.iataCode, f.airlineName))
+        .collect()
+        .toMap
 
     val airlinesCancelledFlights =
       cancelledFlight
@@ -126,7 +128,10 @@ object FlightDelaysAndCancellations {
   (String, Int) = {
 
     val airportMap = airportRDD
-      .map(airport => (airport.iataCode, airport.airport)).collectAsMap()
+      .map(airport => (airport.iataCode, airport.airport))
+      .collect()
+      .toMap
+
 
     val notCancelledFlight =
       flightsRDD.filter(flight => flight.cancelled.equals("0"))
