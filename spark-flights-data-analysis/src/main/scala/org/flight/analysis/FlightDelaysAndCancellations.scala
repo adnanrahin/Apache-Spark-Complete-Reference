@@ -3,6 +3,7 @@ package org.flight.analysis
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.storage.StorageLevel
 
 object FlightDelaysAndCancellations {
 
@@ -44,6 +45,10 @@ object FlightDelaysAndCancellations {
     val flightsRDD: RDD[Flight] = loadFlightCsvToRDD(flightsCsv)
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
+
+    println(flightsRDD.persist(StorageLevel.MEMORY_AND_DISK))
+    println(flightsRDD.persist(StorageLevel.OFF_HEAP))
+    println(flightsRDD.persist(StorageLevel.MEMORY_ONLY_SER_2))
 
     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
