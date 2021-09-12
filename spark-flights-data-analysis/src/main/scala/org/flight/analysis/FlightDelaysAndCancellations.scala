@@ -150,7 +150,10 @@ object FlightDelaysAndCancellations {
       .toList.head
 
     totalFlight
+  }
 
+  def findMaxFlightCancelledAirline(): (String, Int) = {
+    null
   }
 
 }
