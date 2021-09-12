@@ -47,8 +47,6 @@ object FlightDelaysAndCancellations {
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
     println(flightsRDD.persist(StorageLevel.MEMORY_AND_DISK))
-    println(flightsRDD.persist(StorageLevel.OFF_HEAP))
-    println(flightsRDD.persist(StorageLevel.MEMORY_ONLY_SER_2))
 
     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
