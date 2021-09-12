@@ -152,8 +152,19 @@ object FlightDelaysAndCancellations {
     totalFlight
   }
 
-  def findMaxFlightCancelledAirline(): (String, Int) = {
-    null
+  def findMaxFlightCancelledAirline(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline]): (String, Int) = {
+
+    val cancelledFlightRDD: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
+
+    val airlineRDDMap = airlineRDD.map(f => (f.iataCode, f.airlineName)).collect().toMap
+
+    val maxCancelledAirliner = cancelledFlightRDD
+      .groupBy(_.airline)
+      .map(flight => (flight._1, flight._2.toList.size))
+      .sortBy(-_._2).collect().toList
+
+    airlineRDDMap.get()
+
   }
 
 }
