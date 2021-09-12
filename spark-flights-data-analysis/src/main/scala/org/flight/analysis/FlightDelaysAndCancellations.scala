@@ -38,9 +38,9 @@ object FlightDelaysAndCancellations {
 
     val sc = spark.sparkContext
 
-    val flightsCsv = sc.textFile("datasource/2015_flights_data/flights.csv")
-    val airlineCsv = sc.textFile("datasource/2015_flights_data/airlines.csv")
-    val airportCsv = sc.textFile("datasource/2015_flights_data/airports.csv")
+    val flightsCsv = sc.textFile("C:\\Users\\rahin\\source-code\\Scala\\Apache-Spark-Complete-Reference\\datasource\\2015_flights_data\\flights.csv")
+    val airlineCsv = sc.textFile("C:\\Users\\rahin\\source-code\\Scala\\Apache-Spark-Complete-Reference\\datasource\\2015_flights_data\\airlines.csv")
+    val airportCsv = sc.textFile("C:\\Users\\rahin\\source-code\\Scala\\Apache-Spark-Complete-Reference\\datasource\\2015_flights_data\\airports.csv")
 
     val flightsRDD: RDD[Flight] = loadFlightCsvToRDD(flightsCsv)
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
