@@ -49,12 +49,12 @@ object FlightDelaysAndCancellations {
 
     val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
 
-    airlinesCancelledNumberOfFlights.foreach(f => println(f))
-
     val numberOfDepartureFlightFromAirport =
       findTotalNumberOfDepartureFlightFromAirport(flightsRDD, airportRDD, "LGA")
 
-    println(numberOfDepartureFlightFromAirport)
+    val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)
+
+    println(mostCancelledAirline)
 
   }
 
@@ -163,7 +163,10 @@ object FlightDelaysAndCancellations {
       .map(flight => (flight._1, flight._2.toList.size))
       .sortBy(-_._2).collect().toList
 
-    airlineRDDMap.get()
+    airlineRDDMap.get(maxCancelledAirliner.head._1) match {
+      case Some(value) => (value, maxCancelledAirliner.head._2)
+      case None => (s"No Such IATA Code ${maxCancelledAirliner.head._1}", maxCancelledAirliner.head._2)
+    }
 
   }
 
