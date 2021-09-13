@@ -177,10 +177,10 @@ object FlightDelaysAndCancellations {
 
   def findAverageDepartureDelayOfAirliner(flightRDD: RDD[Flight], airlineRDD: RDD[Airline]): List[(String, Double)] = {
 
-    def findAllTheSuccessFlight(flightRDD: RDD[Flight]) = flightRDD
+    def findAllTheSuccessDelayedFlights(flightRDD: RDD[Flight]): RDD[Flight] = flightRDD
       .filter(flight => flight.cancelled.equals("0") && flight.departureDelay.toInt > 0)
 
-    val successFlight: RDD[Flight] = findAllTheSuccessFlight(flightRDD)
+    val successDelayedFlights: RDD[Flight] = findAllTheSuccessDelayedFlights(flightRDD)
 
     
 
