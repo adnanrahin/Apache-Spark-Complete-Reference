@@ -201,8 +201,6 @@ object FlightDelaysAndCancellations {
       .collect()
       .toList
 
-    averageOfAirliner.foreach(f => println(f._1 + " => " + f._2))
-
     averageOfAirliner
 
   }
