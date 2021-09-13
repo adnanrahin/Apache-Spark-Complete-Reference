@@ -3,7 +3,6 @@ package org.flight.analysis
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.storage.StorageLevel
 
 object FlightDelaysAndCancellations {
 
@@ -48,18 +47,18 @@ object FlightDelaysAndCancellations {
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
-    println(flightsRDD.persist(StorageLevel.MEMORY_AND_DISK))
+    /* println(flightsRDD.persist(StorageLevel.MEMORY_AND_DISK))
 
-    val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
+     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
-    val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
+     val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
 
-    val numberOfDepartureFlightFromAirport =
-      findTotalNumberOfDepartureFlightFromAirport(flightsRDD, airportRDD, "LGA")
+     val numberOfDepartureFlightFromAirport =
+       findTotalNumberOfDepartureFlightFromAirport(flightsRDD, airportRDD, "LGA")
 
-    val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)
+     val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)*/
 
-    println(mostCancelledAirline)
+    val delayedAverage = findAverageDepartureDelayOfAirliner(flightsRDD, airlineRDD)
 
   }
 
@@ -182,9 +181,17 @@ object FlightDelaysAndCancellations {
 
     val successDelayedFlights: RDD[Flight] = findAllTheSuccessDelayedFlights(flightRDD)
 
-    
+    val averageOfAirliner = successDelayedFlights
+      .groupBy(_.airline)
+      .map {
+        airline =>
+          (airline._1, airline._2.toList.foldLeft(0.0)(_ + _.departureDelay.toInt), airline._2.size)
+      }
+      .collect().toList
 
-    null
+    averageOfAirliner.foreach(f => println(f._1 + " => " + f._2))
+
+    List(("ME", 40.00))
   }
 
 }
