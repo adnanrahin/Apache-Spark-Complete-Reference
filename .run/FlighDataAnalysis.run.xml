@@ -4,7 +4,7 @@
     <option name="archives">
       <list />
     </option>
-    <option name="artifactArgs" value="--executor-memory 20G --total-executor-cores 100" />
+    <option name="artifactArgs" value="" />
     <option name="artifactPath">
       <FilePath>
         <option name="path" value="$PROJECT_DIR$/spark-flights-data-analysis/target/spark-flights-data-analysis-1.0-SNAPSHOT.jar" />
@@ -13,22 +13,22 @@
     </option>
     <option name="beforeShellScript" value="" />
     <option name="className" value="org.flight.analysis.FlightDelaysAndCancellations" />
-    <option name="clusterManager" value="LOCAL" />
+    <option name="clusterManager" value="STANDALONE" />
     <option name="conf" value="" />
     <option name="deployMode" value="CLUSTER" />
     <option name="driverClassPath">
       <list />
     </option>
-    <option name="driverCores" value="1" />
+    <option name="driverCores" value="12" />
     <option name="driverJavaOptions" value="" />
     <option name="driverLibraryPath">
       <list />
     </option>
-    <option name="driverMemory" value="1024M" />
+    <option name="driverMemory" value="32G" />
     <option name="envParams" value="" />
     <option name="excludePackages" value="" />
-    <option name="executorCores" value="" />
-    <option name="executorMemory" value="1G" />
+    <option name="executorCores" value="1" />
+    <option name="executorMemory" value="32G" />
     <option name="files">
       <list />
     </option>
@@ -43,7 +43,7 @@
       </FilePath>
     </option>
     <option name="master" value="spark://172.26.208.1:7077" />
-    <option name="numExecutors" value="" />
+    <option name="numExecutors" value="24" />
     <option name="packages" value="" />
     <option name="principal" value="" />
     <option name="projectPathOnTarget" />
@@ -66,8 +66,8 @@
     <option name="shellExecutor" value="/bin/bash" />
     <option name="sparkHome" value="C:\spark\spark-3.1.2" />
     <option name="sparkMonitoringDriverId" value="" />
-    <option name="supervise" value="false" />
-    <option name="totalExecutorCores" value="" />
+    <option name="supervise" value="true" />
+    <option name="totalExecutorCores" value="24" />
     <option name="verbose" value="false" />
     <option name="workDirectoryPath">
       <FilePath>
