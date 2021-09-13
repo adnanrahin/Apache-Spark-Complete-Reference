@@ -15,7 +15,7 @@
     <option name="className" value="org.flight.analysis.FlightDelaysAndCancellations" />
     <option name="clusterManager" value="STANDALONE" />
     <option name="conf" value="" />
-    <option name="deployMode" value="CLUSTER" />
+    <option name="deployMode" value="CLIENT" />
     <option name="driverClassPath">
       <list />
     </option>

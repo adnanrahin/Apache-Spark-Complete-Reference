@@ -3,6 +3,7 @@ package org.flight.analysis
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.storage.StorageLevel
 
 object FlightDelaysAndCancellations {
 
@@ -47,7 +48,7 @@ object FlightDelaysAndCancellations {
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
-    /* println(flightsRDD.persist(StorageLevel.MEMORY_AND_DISK))
+     println(flightsRDD.persist(StorageLevel.MEMORY_AND_DISK))
 
      val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
@@ -56,7 +57,7 @@ object FlightDelaysAndCancellations {
      val numberOfDepartureFlightFromAirport =
        findTotalNumberOfDepartureFlightFromAirport(flightsRDD, airportRDD, "LGA")
 
-     val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)*/
+     val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)
 
     val delayedAverage = findAverageDepartureDelayOfAirliner(flightsRDD, airlineRDD)
 
@@ -197,7 +198,7 @@ object FlightDelaysAndCancellations {
           case Some(value) => (value, airline._2 / airline._3)
           case None => (s"No Such IATA Code ${airline._1}", airline._2 / airline._3)
         }
-    }
+    }.sortBy(_._2)
       .collect()
       .toList
 
