@@ -3,6 +3,7 @@ package org.flight.analysis
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.storage.StorageLevel
 
 object FlightDelaysAndCancellations {
 
@@ -47,19 +48,20 @@ object FlightDelaysAndCancellations {
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
-     /*println(flightsRDD.persist(StorageLevel.MEMORY_AND_DISK))*/
+    airportRDD.saveAsObjectFile("C:\\Users\\rahin\\object")
 
-     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
+    println(flightsRDD.persist(StorageLevel.MEMORY_AND_DISK))
 
-     val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
+    val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
-     val numberOfDepartureFlightFromAirport =
-       findTotalNumberOfDepartureFlightFromAirport(flightsRDD, airportRDD, "LGA")
+    val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
 
-     val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)
+    val numberOfDepartureFlightFromAirport =
+      findTotalNumberOfDepartureFlightFromAirport(flightsRDD, airportRDD, "LGA")
+
+    val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)
 
     val delayedAverage = findAverageDepartureDelayOfAirliner(flightsRDD, airlineRDD)
-
   }
 
   def loadFlightCsvToRDD(flightsCSV: RDD[String]): RDD[Flight] = {
