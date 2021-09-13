@@ -136,8 +136,7 @@ object FlightDelaysAndCancellations {
       .map(airport => (airport.iataCode, airport.airport))
       .collect()
       .toMap
-
-
+    
     val notCancelledFlight =
       flightsRDD.filter(flight => flight.cancelled.equals("0"))
 
