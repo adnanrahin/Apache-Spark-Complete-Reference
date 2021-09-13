@@ -179,19 +179,32 @@ object FlightDelaysAndCancellations {
     def findAllTheSuccessDelayedFlights(flightRDD: RDD[Flight]): RDD[Flight] = flightRDD
       .filter(flight => flight.cancelled.equals("0") && flight.departureDelay.toInt > 0)
 
+    val airlineRDDMap = airlineRDD
+      .map(airline => (airline.iataCode, airline.airlineName))
+      .collect()
+      .toMap
+
     val successDelayedFlights: RDD[Flight] = findAllTheSuccessDelayedFlights(flightRDD)
 
-    val averageOfAirliner = successDelayedFlights
+    val averageOfAirliner: List[(String, Double)] = successDelayedFlights
       .groupBy(_.airline)
       .map {
         airline =>
           (airline._1, airline._2.toList.foldLeft(0.0)(_ + _.departureDelay.toInt), airline._2.size)
-      }
-      .collect().toList
+      }.map {
+      airline =>
+        airlineRDDMap.get(airline._1) match {
+          case Some(value) => (value, airline._2 / airline._3)
+          case None => (s"No Such IATA Code ${airline._1}", airline._2 / airline._3)
+        }
+    }
+      .collect()
+      .toList
 
     averageOfAirliner.foreach(f => println(f._1 + " => " + f._2))
 
-    List(("ME", 40.00))
+    averageOfAirliner
+
   }
 
 }
