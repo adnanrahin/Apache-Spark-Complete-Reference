@@ -3,7 +3,6 @@ package org.flight.analysis
 import org.apache.log4j.{Level, Logger}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.storage.StorageLevel
 
 object FlightDelaysAndCancellations {
 
@@ -48,8 +47,6 @@ object FlightDelaysAndCancellations {
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
-    println(flightsRDD.persist(StorageLevel.MEMORY_AND_DISK))
-
     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
     val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
@@ -60,6 +57,11 @@ object FlightDelaysAndCancellations {
     val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)
 
     val delayedAverage = findAverageDepartureDelayOfAirliner(flightsRDD, airlineRDD)
+
+    println("################ Average Departure Delayed for each Airliner")
+
+    delayedAverage.foreach(airline => println(airline._1 + " => " + airline._2))
+
   }
 
   def loadFlightCsvToRDD(flightsCSV: RDD[String]): RDD[Flight] = {
