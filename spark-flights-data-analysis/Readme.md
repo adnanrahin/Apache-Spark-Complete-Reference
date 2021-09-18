@@ -27,6 +27,3 @@ only showing top 5 rows
 +--------------------+--------------------------------+
 only showing top 5 rows
 ```
-```bigquery
-select * from where id = megatron
-```
