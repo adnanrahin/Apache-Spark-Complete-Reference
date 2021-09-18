@@ -16,33 +16,42 @@ only showing top 5 rows
 
 #### 2. Find total of number flights cancelled byt Airline Name
 ```
-+----------------------------+--------------------------------+
-|Airline Names               |Total Number Of Flight Cancelled|
-+----------------------------+--------------------------------+
-|United Air Lines Inc.       |6573                            |
-|Virgin America              |534                             |
-|US Airways Inc.             |4067                            |
-|American Eagle Airlines Inc.|15025                           |
-|Southwest Airlines Co.      |16043                           |
-+----------------------------+--------------------------------+
++----------------------------+----------------------------------+
+|Airline Names               |Total Number Of Flight's Cancelled|
++----------------------------+----------------------------------+
+|United Air Lines Inc.       |6573                              |
+|Virgin America              |534                               |
+|US Airways Inc.             |4067                              |
+|American Eagle Airlines Inc.|15025                             |
+|Southwest Airlines Co.      |16043                             |
+|Delta Air Lines Inc.        |3824                              |
+|Skywest Airlines Inc.       |9960                              |
+|Spirit Air Lines            |2004                              |
+|Alaska Airlines Inc.        |669                               |
+|American Airlines Inc.      |10919                             |
+|Hawaiian Airlines Inc.      |171                               |
+|Atlantic Southeast Airlines |15231                             |
+|JetBlue Airways             |4276                              |
+|Frontier Airlines Inc.      |588                               |
++----------------------------+----------------------------------+
 ```
 
-#### 3. Find total number flights by Airport IATA Code.
+#### 3. Find total number flights Depart from Airport by Airport IATA CODE
 ```
-+---------------------------------------+-------------------+
-|Airport Name                           |Total Number Flight|
-+---------------------------------------+-------------------+
-|LaGuardia Airport (Marine Air Terminal)|95074              |
-+---------------------------------------+-------------------+
++---------------------------------------+------------------------+
+|Airport Name                           |Total Number of Flight's|
++---------------------------------------+------------------------+
+|LaGuardia Airport (Marine Air Terminal)|95074                   |
++---------------------------------------+------------------------+
 ```
 
 #### 4. Find most cancelled Airline Name and total Number of Cancelled Flights
 ```
-+----------------------+-------------------+
-|Airline Name          |Total Number Flight|
-+----------------------+-------------------+
-|Southwest Airlines Co.|16043              |
-+----------------------+-------------------+
++----------------------+------------------------+
+|Airline Name          |Total Number of Flight's|
++----------------------+------------------------+
+|Southwest Airlines Co.|16043                   |
++----------------------+------------------------+
 ```
 
 #### 5. Find Average delayed by Airliner

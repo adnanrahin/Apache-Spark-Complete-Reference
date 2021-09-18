@@ -207,6 +207,7 @@ object FlightDelaysAndCancellations {
   }
 
   def showCancelledFlightInDataFrame(flightsRDD: RDD[Flight], spark: SparkSession): Unit = {
+
     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
 
     spark.createDataFrame(rdd = cancelledFlight)
@@ -216,13 +217,15 @@ object FlightDelaysAndCancellations {
 
   def airlinesCancelledNumberOfFlightsToDF
   (flightsRDD: RDD[Flight], spark: SparkSession, airlineRDD: RDD[Airline]): Unit = {
+
     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
+
     val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
 
     spark
       .createDataFrame(airlinesCancelledNumberOfFlights)
-      .toDF("Airline Names", "Total Number Of Flight Cancelled").
-      show(numRows = 5, truncate = false)
+      .toDF("Airline Names", "Total Number Of Flight's Cancelled").
+      show(truncate = false)
   }
 
   def findTotalNumberOfDepartureFlightFromAirportToDF
@@ -233,15 +236,19 @@ object FlightDelaysAndCancellations {
 
     spark
       .createDataFrame(List(numberOfDepartureFlightFromAirport))
-      .toDF("Airport Name", "Total Number Flight").show(truncate = false)
+      .toDF("Airport Name", "Total Number of Flight's")
+      .show(truncate = false)
 
   }
 
   def findMostCancelledAirlineToDF(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline], spark: SparkSession): Unit = {
+
     val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)
+
     spark
       .createDataFrame(List(mostCancelledAirline))
-      .toDF("Airline Name", "Total Number Flight").show(false)
+      .toDF("Airline Name", "Total Number of Flight's")
+      .show(false)
   }
 
   def findAverageDepartureDelayOfAirlinerToDF(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline], spark: SparkSession): Unit = {
