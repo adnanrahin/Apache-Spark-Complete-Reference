@@ -45,7 +45,7 @@ only showing top 5 rows
 +----------------------+-------------------+
 ```
 
-#### 5. Find Average delayed by airliner
+#### 5. Find Average delayed by Airliner
 ```
 +----------------------------+------------------+
 |Airline Name                |Average Delay     |
