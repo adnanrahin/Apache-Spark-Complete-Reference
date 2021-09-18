@@ -51,11 +51,12 @@ object FlightDelaysAndCancellations {
     airlinesCancelledNumberOfFlightsToDF(flightsRDD, spark, airlineRDD)
     findTotalNumberOfDepartureFlightFromAirportToDF(flightsRDD, airportRDD, "LGA", spark)
     findMostCancelledAirlineToDF(flightsRDD, airlineRDD, spark)
+    findAverageDepartureDelayOfAirlinerToDF(flightsRDD, airlineRDD, spark)
 
 
     /*
 
-    val delayedAverage = findAverageDepartureDelayOfAirliner(flightsRDD, airlineRDD)
+
 
     println("################ Average Departure Delayed for each Airliner")
 
@@ -241,6 +242,16 @@ object FlightDelaysAndCancellations {
     spark
       .createDataFrame(List(mostCancelledAirline))
       .toDF("Airline Name", "Total Number Flight").show(false)
+  }
+
+  def findAverageDepartureDelayOfAirlinerToDF(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline], spark: SparkSession): Unit = {
+
+    val delayedAverage = findAverageDepartureDelayOfAirliner(flightsRDD, airlineRDD)
+
+    spark
+      .createDataFrame(delayedAverage)
+      .toDF("Airline Name", "Average Delay").show(false)
+
   }
 
 }
