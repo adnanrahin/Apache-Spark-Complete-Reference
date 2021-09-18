@@ -51,7 +51,9 @@ object FlightDelaysAndCancellations {
 
     val cancelledFlightDFF = spark.createDataFrame(rdd = cancelledFlight)
 
-    cancelledFlightDFF.show()
+    cancelledFlightDFF
+      .select("airline", "tailNumber", "originAirport", "destinationAirport", "cancellationsReason")
+      .show(5)
 
     /*val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
 
