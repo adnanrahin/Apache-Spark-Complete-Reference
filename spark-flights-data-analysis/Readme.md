@@ -16,24 +16,31 @@ only showing top 5 rows
 
 #### 2. Find total of number flights cancelled byt Airline Name
 ```
-+--------------------+--------------------------------+
-|       Airline Names|Total Number Of Flight Cancelled|
-+--------------------+--------------------------------+
-|United Air Lines ...|                            6573|
-|      Virgin America|                             534|
-|     US Airways Inc.|                            4067|
-|American Eagle Ai...|                           15025|
-|Southwest Airline...|                           16043|
-+--------------------+--------------------------------+
-only showing top 5 rows
++----------------------------+--------------------------------+
+|Airline Names               |Total Number Of Flight Cancelled|
++----------------------------+--------------------------------+
+|United Air Lines Inc.       |6573                            |
+|Virgin America              |534                             |
+|US Airways Inc.             |4067                            |
+|American Eagle Airlines Inc.|15025                           |
+|Southwest Airlines Co.      |16043                           |
++----------------------------+--------------------------------+
 ```
 
 #### 3. Find total number flights by Airport IATA Code.
 ```
-+--------------------+-------------------+
-|        Airport Name|Total Number Flight|
-+--------------------+-------------------+
-|LaGuardia Airport...|              95074|
-+--------------------+-------------------+
++---------------------------------------+-------------------+
+|Airport Name                           |Total Number Flight|
++---------------------------------------+-------------------+
+|LaGuardia Airport (Marine Air Terminal)|95074              |
++---------------------------------------+-------------------+
+```
 
+#### 4. Find most cancelled Airline Name and total Number of Cancelled Flights
+```
++----------------------+-------------------+
+|Airline Name          |Total Number Flight|
++----------------------+-------------------+
+|Southwest Airlines Co.|16043              |
++----------------------+-------------------+
 ```
