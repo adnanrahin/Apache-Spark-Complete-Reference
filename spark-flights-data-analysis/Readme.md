@@ -27,3 +27,13 @@ only showing top 5 rows
 +--------------------+--------------------------------+
 only showing top 5 rows
 ```
+
+#### 3. Find total number flights by Airport IATA Code.
+```
++--------------------+-------------------+
+|        Airport Name|Total Number Flight|
++--------------------+-------------------+
+|LaGuardia Airport...|              95074|
++--------------------+-------------------+
+
+```
