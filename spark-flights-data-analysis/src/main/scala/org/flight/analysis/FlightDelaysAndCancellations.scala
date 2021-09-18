@@ -47,14 +47,13 @@ object FlightDelaysAndCancellations {
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
-    val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
+    showCancelledFlightInDataFrame(flightsRDD, spark)
+    airlinesCancelledNumberOfFlightsToDF(flightsRDD, spark, airlineRDD)
+    findTotalNumberOfDepartureFlightFromAirportToDF(flightsRDD, airportRDD, "LGA", spark)
 
-    val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
+    //airlinesCancelledNumberOfFlightsToDF(airlinesCancelledNumberOfFlights, spark)
 
-    airlinesCancelledNumberOfFlightsToDF(airlinesCancelledNumberOfFlights, spark)
-
-    /*val numberOfDepartureFlightFromAirport =
-      findTotalNumberOfDepartureFlightFromAirport(flightsRDD, airportRDD, "LGA")
+    /*
 
     val mostCancelledAirline = findMaxFlightCancelledAirline(flightsRDD, airlineRDD)
 
@@ -208,17 +207,35 @@ object FlightDelaysAndCancellations {
 
   }
 
-  def showCancelledFlightInDataFrame(cancelledFlightRDD: RDD[Flight], spark: SparkSession): Unit = {
-    spark.createDataFrame(rdd = cancelledFlightRDD)
+  def showCancelledFlightInDataFrame(flightsRDD: RDD[Flight], spark: SparkSession): Unit = {
+    val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
+
+    spark.createDataFrame(rdd = cancelledFlight)
       .select("airline", "tailNumber", "originAirport", "destinationAirport", "cancellationsReason")
       .show(5)
   }
 
-  def airlinesCancelledNumberOfFlightsToDF(cancelledFlightRDD: List[(String, Int)], spark: SparkSession): Unit = {
+  def airlinesCancelledNumberOfFlightsToDF
+  (flightsRDD: RDD[Flight], spark: SparkSession, airlineRDD: RDD[Airline]): Unit = {
+    val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
+    val airlinesCancelledNumberOfFlights = findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight, airlineRDD)
+
     spark
-      .createDataFrame(cancelledFlightRDD)
+      .createDataFrame(airlinesCancelledNumberOfFlights)
       .toDF("Airline Names", "Total Number Of Flight Cancelled").
       show(5)
+  }
+
+  def findTotalNumberOfDepartureFlightFromAirportToDF
+  (flightsRDD: RDD[Flight], airportRDD: RDD[Airport], airportIataCode: String, spark: SparkSession): Unit = {
+
+    val numberOfDepartureFlightFromAirport =
+      findTotalNumberOfDepartureFlightFromAirport(flightsRDD, airportRDD, airportIataCode)
+
+    spark
+      .createDataFrame(List(numberOfDepartureFlightFromAirport))
+      .toDF("Airport Name", "Total Number Flight").show()
+
   }
 
 }
