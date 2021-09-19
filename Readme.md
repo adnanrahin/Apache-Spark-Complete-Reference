@@ -19,3 +19,9 @@
 4. [Spark String](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/strings)
 5. [Structured API's](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/structuredapis)
 
+## Others Example Code
+
+1. [Read Data from HDFS to Spark DataFrame](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/blob/master/spark-definitive-guide/src/main/scala/org/spark/apis/readfromcluster/ReadFileFromHdfsClusterToDF.scala)
+2. [Working Example of Spark RDD](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/blob/master/spark-in-action/src/main/scala/org/apache/spark/spark_in_action/chapter_four_rdd/CustomerTransaction.scala)
+3. [Flight Data Actions and Transformations With Spark RDD](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/blob/master/spark-resilient-distributed-dataset/src/main/scala/org/spark/rdd/flights_data/FlightsDataAnalysis.scala)
+4. [Wikipedia Assignment From Coursera](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-resilient-distributed-dataset/src/main/scala/org/spark/rdd/wikipedia)
