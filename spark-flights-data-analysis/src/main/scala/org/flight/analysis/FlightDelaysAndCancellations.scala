@@ -32,9 +32,6 @@ object FlightDelaysAndCancellations {
     /**
      * input parameters
      *  1. datasource: path
-     *     2. flight.csv
-     *     3. airline.csv
-     *     4. airport.csv
      * */
 
     val spark = SparkSession
