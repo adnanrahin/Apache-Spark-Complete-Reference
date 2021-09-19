@@ -1,41 +1,23 @@
-### Spark High-Level Structured APIs:
-Spark is a unified analytics engine for large-scale data processing. It provides high-level APIs in Scala, Java, Python, and R, and an optimized engine that supports general computation graphs for data analysis. It also supports a rich set of higher-level tools including Spark SQL for SQL and DataFrames, MLlib for machine learning, GraphX for graph processing, and Structured Streaming for stream processing. 
+## Introduction to Apache Spark and Scala
 
----
+### Scala
 
-### Application
-A user program built on Spark using its APIs. It consists of a driver program and
-executors on the cluster.
-### SparkSession
-An object that provides a point of entry to interact with underlying Spark functionality 
-and allows programming Spark with its APIs. In an interactive Spark
-shell, the Spark driver instantiates a SparkSession for you, while in a Spark
-application, you create a SparkSession object yourself.
-### Job
-A parallel computation consisting of multiple tasks that gets spawned in response
-to a Spark action (e.g., save(), collect()).
-### Stage
-Each job gets divided into smaller sets of tasks called stages that depend on each
-other.
-### Task
-A single unit of work or execution that will be sent to a Spark executor.
+## [Programming in Scala](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/programming-in-scala) 
 
-----------------------------------------------------
+1. [Sample Scala Code Intro](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/programming-in-scala/src/main/scala/org/programming/scala/introduction)
+2. [Case Classes and Pattern Matching Example](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/programming-in-scala/src/main/scala/org/programming/scala/case_classes_and_pattern_matching)
+3. [Class and Objects](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/blob/master/programming-in-scala/src/main/scala/org/programming/scala/clsss_and_objectsa)
+4. [Control Abstraction](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/programming-in-scala/src/main/scala/org/programming/scala/control_abstraction)
+5. [Functional Object](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/programming-in-scala/src/main/scala/org/programming/scala/functional_objects)
+6. [Functional Programming in Scala](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/programming-in-scala/src/main/scala/org/programming/scala/functional_programming_scala)
+7. [Scala Data Structures](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/programming-in-scala/src/main/scala/org/programming/scala/working_with_lists)
 
-#### Spark operations on distributed data can be classified into two types: transformations and actions. 
+## [Spark Definitive Guide](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide)
 
-1. Transformations: as the name suggests, transform a Spark DataFrame
-into a new DataFrame without altering the original data, giving it the property of
-immutability. Transformations can be classified as having either narrow dependencies or wide dependencies.
-     1. Any transformation where a single output partition can be computed
-        from a single input partition is a narrow transformation. For example, in the previous
-        code snippet, filter() and contains() represent narrow transformations because
-        they can operate on a single partition and produce the resulting output partition
-        without any exchange of data.
-     2. However, groupBy() or orderBy() instruct Spark to perform wide transformations,
-        where data from other partitions is read in, combined, and written to disk. Since each
-        partition will have its own count of the word that contains the “Spark” word in its row
-        of data, a count (groupBy()) will force a shuffle of data from each of the executor’s
-        partitions across the cluster. In this transformation, orderBy() requires to be output from
-        other partitions to compute the final aggregation. 
+1. [Introduction to Spark](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/introduction)
+2. [Spark Data Frame Aggregations](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/aggregations)
+3. [Spark RDD](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/rdd)
+4. [Spark String](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/strings)
+5. [Structured API's](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/structuredapis)
+
 
