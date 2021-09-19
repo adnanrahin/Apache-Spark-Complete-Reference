@@ -1,6 +1,5 @@
 ## Introduction to Apache Spark and Scala
 
-### Scala
 
 ## [Programming in Scala](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/programming-in-scala) 
 
@@ -19,5 +18,4 @@
 3. [Spark RDD](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/rdd)
 4. [Spark String](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/strings)
 5. [Structured API's](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-definitive-guide/src/main/scala/org/spark/apis/structuredapis)
-
 

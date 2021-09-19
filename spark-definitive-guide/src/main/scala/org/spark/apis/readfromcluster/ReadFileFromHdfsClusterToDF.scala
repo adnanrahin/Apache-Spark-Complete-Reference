@@ -1,12 +1,8 @@
 package org.spark.apis.readfromcluster
 
-import org.apache.hadoop.conf.Configuration
-import org.apache.hadoop.fs.FileSystem
 import org.apache.spark.sql.SparkSession
 
-import java.net.URI
-
-object ReadFileFromHdfsCluster {
+object ReadFileFromHdfsClusterToDF {
 
   def main(args: Array[String]): Unit = {
 
