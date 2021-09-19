@@ -4,7 +4,7 @@
     <option name="archives">
       <list />
     </option>
-    <option name="artifactArgs" value="" />
+    <option name="artifactArgs" value="C:\Users\rahin\source-code\Scala\Apache-Spark-Complete-Reference\datasource\2015_flights_data\" />
     <option name="artifactPath">
       <FilePath>
         <option name="path" value="$PROJECT_DIR$/spark-flights-data-analysis/target/spark-flights-data-analysis-1.0-SNAPSHOT.jar" />
@@ -42,7 +42,7 @@
         <option name="type" value="FILE" />
       </FilePath>
     </option>
-    <option name="master" value="spark://172.26.208.1:7077" />
+    <option name="master" value="spark://172.27.144.1:7077" />
     <option name="numExecutors" value="24" />
     <option name="packages" value="" />
     <option name="principal" value="" />

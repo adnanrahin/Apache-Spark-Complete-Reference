@@ -29,6 +29,14 @@ object FlightDelaysAndCancellations {
 
   def main(args: Array[String]): Unit = {
 
+    /**
+     * input parameters
+     *  1. datasource: path
+     *     2. flight.csv
+     *     3. airline.csv
+     *     4. airport.csv
+     * */
+
     val spark = SparkSession
       .builder()
       .appName("FlightDelaysAndCancellations")
@@ -37,7 +45,7 @@ object FlightDelaysAndCancellations {
 
     val sc = spark.sparkContext
 
-    val dataSourcePath = "C:\\Users\\rahin\\source-code\\Scala\\Apache-Spark-Complete-Reference\\datasource\\2015_flights_data\\"
+    val dataSourcePath = args(0)
 
     val flightsCsv = sc.textFile(dataSourcePath + "flights.csv")
     val airlineCsv = sc.textFile(dataSourcePath + "airlines.csv")
@@ -53,14 +61,7 @@ object FlightDelaysAndCancellations {
     findMostCancelledAirlineToDF(flightsRDD, airlineRDD, spark)
     findAverageDepartureDelayOfAirlinerToDF(flightsRDD, airlineRDD, spark)
 
-
-    /*
-
-
-
-    println("################ Average Departure Delayed for each Airliner")
-
-    delayedAverage.foreach(airline => println(airline._1 + " => " + airline._2))*/
+    spark.close()
 
   }
 
