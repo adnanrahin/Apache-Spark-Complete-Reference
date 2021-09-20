@@ -52,11 +52,11 @@ object FlightDelaysAndCancellations {
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
-    showCancelledFlightInDataFrame(flightsRDD, spark)
-    airlinesCancelledNumberOfFlightsToDF(flightsRDD, spark, airlineRDD)
-    findTotalNumberOfDepartureFlightFromAirportToDF(flightsRDD, airportRDD, "LGA", spark)
-    findMostCancelledAirlineToDF(flightsRDD, airlineRDD, spark)
-    findAverageDepartureDelayOfAirlinerToDF(flightsRDD, airlineRDD, spark)
+    /*    showCancelledFlightInDataFrame(flightsRDD, spark)
+        airlinesCancelledNumberOfFlightsToDF(flightsRDD, spark, airlineRDD)
+        findTotalNumberOfDepartureFlightFromAirportToDF(flightsRDD, airportRDD, "LGA", spark)
+        findMostCancelledAirlineToDF(flightsRDD, airlineRDD, spark)
+        findAverageDepartureDelayOfAirlinerToDF(flightsRDD, airlineRDD, spark)*/
     findTotalDistanceFlownEachAirlineToDF(flightsRDD, airlineRDD, spark)
 
     spark.close()
@@ -207,6 +207,8 @@ object FlightDelaysAndCancellations {
 
   def findTotalDistanceFlownEachAirline(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline]): RDD[(String, Long)] = {
 
+    val airlineMap = airlineRDD.map(airline => (airline.iataCode, airline.iataCode))
+
     val totalAirlineDistance = flightsRDD
       .filter(_.cancelled.equals("0"))
       .groupBy(_.airline)
@@ -214,8 +216,17 @@ object FlightDelaysAndCancellations {
         airline =>
           (airline._1, airline._2.foldLeft(0L)(_ + _.distance.toLong))
       }
+    val k = totalAirlineDistance.map {
+      airline =>
+        val iter = airlineMap
+          .filter(f => f._1.equals(airline._1)) match {
+          case list => list.take(1).head._2
+          case _ => "NONE"
+        }
+        (iter, airline._2)
+    }
 
-    totalAirlineDistance
+    k
 
   }
 
