@@ -204,6 +204,12 @@ object FlightDelaysAndCancellations {
 
   }
 
+  def findTotalDistanceFlownEachAirline(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline]): RDD[(String, Long)] = {
+
+    null
+
+  }
+
   def showCancelledFlightInDataFrame(flightsRDD: RDD[Flight], spark: SparkSession): Unit = {
 
     val cancelledFlight: RDD[Flight] = findAllTheFlightsGetCancelled(flightsRDD)
