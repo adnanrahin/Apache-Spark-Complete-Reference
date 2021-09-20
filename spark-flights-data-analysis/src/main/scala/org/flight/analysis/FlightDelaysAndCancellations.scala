@@ -211,8 +211,8 @@ object FlightDelaysAndCancellations {
       .filter(_.cancelled.equals("0"))
       .groupBy(_.airline)
       .map {
-        airlineInfo =>
-          (airlineInfo._1, airlineInfo._2.reduce(_.distance.toLong + _.distance.toLong))
+        airline =>
+          (airline._1, airline._2.foldLeft(0L)(_ + _.distance.toLong))
       }
 
     totalAirlineDistance
