@@ -207,16 +207,26 @@ object FlightDelaysAndCancellations {
 
   def findTotalDistanceFlownEachAirline(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline]): RDD[(String, Long)] = {
 
-    val airlineMap = airlineRDD.map(airline => (airline.iataCode, airline.iataCode))
+    val airlineMap: RDD[(String, String)] = airlineRDD.map(airline => (airline.iataCode, airline.iataCode))
 
-    val totalAirlineDistance = flightsRDD
+    val totalAirlineDistance: RDD[(String, Long)] = flightsRDD
       .filter(_.cancelled.equals("0"))
       .groupBy(_.airline)
       .map {
         airline =>
           (airline._1, airline._2.foldLeft(0L)(_ + _.distance.toLong))
       }
-    val result = totalAirlineDistance.map {
+    val result = totalAirlineDistance
+      .leftOuterJoin(airlineMap)
+      .map{airline =>
+        val airlineName = airline._2._2 match {
+          case Some(value) => value
+          case None => "None"
+        }
+        (airlineName.toString, airline._2._1)
+      }
+
+      /*map {
       airline =>
         val iter = airlineMap
           .filter(f => f._1.equals(airline._1)) match {
@@ -224,7 +234,7 @@ object FlightDelaysAndCancellations {
           case _ => "NONE"
         }
         (iter, airline._2)
-    }
+    }*/
 
     result
 
