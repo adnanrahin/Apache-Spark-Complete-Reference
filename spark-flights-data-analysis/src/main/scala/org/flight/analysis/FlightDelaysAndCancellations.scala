@@ -105,14 +105,16 @@ object FlightDelaysAndCancellations {
 
   def findAllTheFlightsGetCancelled(flightsRDD: RDD[Flight]): RDD[Flight] = {
     val cancelledFlight =
-      flightsRDD.filter(flight => flight.cancelled.equals("1"))
+      flightsRDD
+        .filter(flight => flight.cancelled.equals("1"))
 
     cancelledFlight
   }
 
   def findAirlinesTotalNumberOfFlightsCancelled(cancelledFlight: RDD[Flight], airlineRDD: RDD[Airline]): List[(String, Int)] = {
     val lookupMAP =
-      airlineRDD.map(f => (f.iataCode, f.airlineName))
+      airlineRDD
+        .map(f => (f.iataCode, f.airlineName))
         .collect()
         .toMap
 
@@ -140,7 +142,8 @@ object FlightDelaysAndCancellations {
       .toMap
 
     val notCancelledFlight =
-      flightsRDD.filter(flight => flight.cancelled.equals("0"))
+      flightsRDD
+        .filter(flight => flight.cancelled.equals("0"))
 
     val totalFlight: (String, Int) = notCancelledFlight
       .groupBy(flight => flight.originAirport)
@@ -217,9 +220,10 @@ object FlightDelaysAndCancellations {
         airline =>
           (airline._1, airline._2.foldLeft(0L)(_ + _.distance.toLong))
       }
+
     val leftOuterJoinRDD: RDD[(String, (Long, Option[String]))] =
       totalAirlineDistance
-      .leftOuterJoin(airlineMap)
+        .leftOuterJoin(airlineMap)
 
     /**
      * NB: Output Data looks like in result
@@ -240,14 +244,18 @@ object FlightDelaysAndCancellations {
      * (US,(178393656,Some(US Airways Inc.)))
      * */
 
-    val result = leftOuterJoinRDD.map{airline =>
-      val airlineName = airline._2._2 match {
-        case Some(value) => value
-        case None => "None"
-      }
-      (airlineName, airline._2._1)
-    }
+    val result = leftOuterJoinRDD
+      .map {
+        airline =>
+          val airlineName = airline._2._2 match {
+            case Some(value) => value
+            case None => "None"
+          }
+          (airlineName, airline._2._1)
+      }.sortBy(_._2, ascending = false)
+
     result
+
   }
 
   def findTotalDistanceFlownEachAirlineToDF(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline], spark: SparkSession): Unit = {
@@ -313,7 +321,8 @@ object FlightDelaysAndCancellations {
 
     spark
       .createDataFrame(delayedAverage)
-      .toDF("Airline Name", "Average Delay").show(false)
+      .toDF("Airline Name", "Average Delay")
+      .show(false)
 
   }
 
