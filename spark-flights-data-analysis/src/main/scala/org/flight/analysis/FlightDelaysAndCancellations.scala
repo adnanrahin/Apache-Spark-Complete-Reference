@@ -216,7 +216,7 @@ object FlightDelaysAndCancellations {
         airline =>
           (airline._1, airline._2.foldLeft(0L)(_ + _.distance.toLong))
       }
-    val k = totalAirlineDistance.map {
+    val result = totalAirlineDistance.map {
       airline =>
         val iter = airlineMap
           .filter(f => f._1.equals(airline._1)) match {
@@ -226,7 +226,7 @@ object FlightDelaysAndCancellations {
         (iter, airline._2)
     }
 
-    k
+    result
 
   }
 
