@@ -52,12 +52,11 @@ object FlightDelaysAndCancellations {
     val airlineRDD: RDD[Airline] = loadAirlineToRDD(airlineCsv)
     val airportRDD: RDD[Airport] = loadAirportToRDD(airportCsv)
 
-    /*    showCancelledFlightInDataFrame(flightsRDD, spark)
-        airlinesCancelledNumberOfFlightsToDF(flightsRDD, spark, airlineRDD)
-        findTotalNumberOfDepartureFlightFromAirportToDF(flightsRDD, airportRDD, "LGA", spark)
-        findMostCancelledAirlineToDF(flightsRDD, airlineRDD, spark)
-        findAverageDepartureDelayOfAirlinerToDF(flightsRDD, airlineRDD, spark)*/
-
+    showCancelledFlightInDataFrame(flightsRDD, spark)
+    airlinesCancelledNumberOfFlightsToDF(flightsRDD, spark, airlineRDD)
+    findTotalNumberOfDepartureFlightFromAirportToDF(flightsRDD, airportRDD, "LGA", spark)
+    findMostCancelledAirlineToDF(flightsRDD, airlineRDD, spark)
+    findAverageDepartureDelayOfAirlinerToDF(flightsRDD, airlineRDD, spark)
     findTotalDistanceFlownEachAirlineToDF(flightsRDD, airlineRDD, spark)
 
     spark.close()
