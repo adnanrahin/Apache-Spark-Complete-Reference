@@ -57,6 +57,7 @@ object FlightDelaysAndCancellations {
         findTotalNumberOfDepartureFlightFromAirportToDF(flightsRDD, airportRDD, "LGA", spark)
         findMostCancelledAirlineToDF(flightsRDD, airlineRDD, spark)
         findAverageDepartureDelayOfAirlinerToDF(flightsRDD, airlineRDD, spark)*/
+
     findTotalDistanceFlownEachAirlineToDF(flightsRDD, airlineRDD, spark)
 
     spark.close()
@@ -207,7 +208,7 @@ object FlightDelaysAndCancellations {
 
   def findTotalDistanceFlownEachAirline(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline]): RDD[(String, Long)] = {
 
-    val airlineMap: RDD[(String, String)] = airlineRDD.map(airline => (airline.iataCode, airline.iataCode))
+    val airlineMap: RDD[(String, String)] = airlineRDD.map(airline => (airline.iataCode, airline.airlineName))
 
     val totalAirlineDistance: RDD[(String, Long)] = flightsRDD
       .filter(_.cancelled.equals("0"))
@@ -216,28 +217,37 @@ object FlightDelaysAndCancellations {
         airline =>
           (airline._1, airline._2.foldLeft(0L)(_ + _.distance.toLong))
       }
-    val result = totalAirlineDistance
+    val leftOuterJoinRDD: RDD[(String, (Long, Option[String]))] =
+      totalAirlineDistance
       .leftOuterJoin(airlineMap)
-      .map{airline =>
-        val airlineName = airline._2._2 match {
-          case Some(value) => value
-          case None => "None"
-        }
-        (airlineName.toString, airline._2._1)
+
+    /**
+     * NB: Output Data looks like in result
+     *
+     * (NK,(113749628,Some(Spirit Air Lines)))
+     * (WN,(924523336,Some(Southwest Airlines Co.)))
+     * (HA,(48160938,Some(Hawaiian Airlines Inc.)))
+     * (MQ,(118297439,Some(American Eagle Airlines Inc.)))
+     * (DL,(744626128,Some(Delta Air Lines Inc.)))
+     * (EV,(257284318,Some(Atlantic Southeast Airlines)))
+     * (B6,(279708698,Some(JetBlue Airways)))
+     * (F9,(87302103,Some(Frontier Airlines Inc.)))
+     * (AS,(206001530,Some(Alaska Airlines Inc.)))
+     * (AA,(745699296,Some(American Airlines Inc.)))
+     * (UA,(647702424,Some(United Air Lines Inc.)))
+     * (OO,(288044533,Some(Skywest Airlines Inc.)))
+     * (VX,(86275456,Some(Virgin America)))
+     * (US,(178393656,Some(US Airways Inc.)))
+     * */
+
+    val result = leftOuterJoinRDD.map{airline =>
+      val airlineName = airline._2._2 match {
+        case Some(value) => value
+        case None => "None"
       }
-
-      /*map {
-      airline =>
-        val iter = airlineMap
-          .filter(f => f._1.equals(airline._1)) match {
-          case list => list.take(1).head._2
-          case _ => "NONE"
-        }
-        (iter, airline._2)
-    }*/
-
+      (airlineName, airline._2._1)
+    }
     result
-
   }
 
   def findTotalDistanceFlownEachAirlineToDF(flightsRDD: RDD[Flight], airlineRDD: RDD[Airline], spark: SparkSession): Unit = {
