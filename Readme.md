@@ -28,3 +28,8 @@
 
 
 ## [Department of Transportations 2015 USA Domestic Flight Data Analysis](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-flights-data-analysis)
+### Here is the link to the original data from Kaggle: [Data Source](https://www.kaggle.com/usdot/flight-delays)
+
+``According to 2010 US FAA reports, because of flight delays and cancellations US Airline, Passengers and other relevant businesses Cost 32.9 Billion Dollars.
+This project focus on finding the best Airline to fly with in given time window. There are 6 million records historical data is being use.``
+
