@@ -26,10 +26,54 @@
 3. [Flight Data Actions and Transformations With Spark RDD](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/blob/master/spark-resilient-distributed-dataset/src/main/scala/org/spark/rdd/flights_data/FlightsDataAnalysis.scala)
 4. [Wikipedia Assignment From Coursera](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-resilient-distributed-dataset/src/main/scala/org/spark/rdd/wikipedia)
 
+## Spark Readings
 
-## [Department of Transportations 2015 USA Domestic Flight Data Analysis](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/spark-flights-data-analysis)
-### Here is the link to the original data from Kaggle: [Data Source](https://www.kaggle.com/usdot/flight-delays)
+### RDD: Resilient Distributed Dataset
 
-``According to 2010 US FAA reports, because of flight delays and cancellations US Airline, Passengers and other relevant businesses Cost 32.9 Billion Dollars.
-This project focus on finding the best Airline to fly with in given time window. There are 6 million records historical data is being use.``
+```
+The RDD is the fundamental abstraction in Spark. It represents a
+collection of elements that is
+    1. Immutable (read-only)
+    2. Resilient (fault-tolerant)
+    3. Distributed (dataset spread out to more than one node)
+To summarize, the purpose of RDDs is to facilitate parallel operations on large datasets in a straightforward manner, abstracting away their distributed nature and inherent fault tolerance.
+RDDs are resilient because of Spark’ s built-in fault recovery mechanics. Spark is capable of healing RDDs in case of node failure. 
+```
 
+### RDD Operations
+```
+There are two types of RDD Operations: 
+    1. Trasformations.
+    2. Actions.
+```
+#### RDD Transformations:
+```
+Transformations (for example, filter or map) are operations that produce a new RDD by performing some useful data manipulation on another RDD.
+
+It’ s important to understand that transformations are evaluated lazily, meaning computation doesn’ t take place until you invoke an action. Once
+an action is triggered on an RDD, Spark examines the RDD’ s lineage and uses that information to build a “ graph of operations” that needs to
+be executed in order to compute the action. Think of a transformation as a sort of diagram that tells Spark which operations need to happen and
+in which order once an action gets executed.
+
+```
+#### RDD Actions:
+```
+Actions(for example, count or foreach) trigger a computation in order to return the result to the calling program or to perform some actions on an RDD’ s elements.
+```
+
+### Apache Spark Partitions
+
+#### What is a partition in Spark?
+```
+In Big Data world Spark RDD can be huge in size, it is not always possible to fit the dataset into one single node, and have be paritioned across various nodes. 
+Spark automatically partitions RDDs and distributes the partitions across different nodes. A partition in spark is an atomic chunk of data (logical division of data) 
+stored on a node in the cluster. Partitions are basic units of parallelism in Apache Spark. RDDs in Apache Spark are collection of partitions.
+```
+#### Characteristics of Partitions in Apache Spark
+```
+1. Every machine in a spark cluster contains one or more partitions.
+2. The number of partitions in spark are configurable and having too few or too many partitions is not good.
+3. Partitions in Spark do not span multiple machines.
+```
+
+#### Partitioning in Apache Spark

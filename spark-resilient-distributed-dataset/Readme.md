@@ -30,3 +30,10 @@ in which order once an action gets executed.
 ```
 Actions(for example, count or foreach) trigger a computation in order to return the result to the calling program or to perform some actions on an RDD’ s elements.
 ```
+
+## RDD Partitions
+```
+In Big Data world Spark RDD can be huge in size, it is not always possible to fit the dataset into one single node, and have be paritioned across various nodes. 
+Spark automatically partitions RDDs and distributes the partitions across different nodes. A partition in spark is an atomic chunk of data (logical division of data) 
+stored on a node in the cluster. Partitions are basic units of parallelism in Apache Spark. RDDs in Apache Spark are collection of partitions.
+```
