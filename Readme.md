@@ -84,10 +84,7 @@ only once, then portioning data within the RDD might not be helpful but if a dat
 data will be helpful.
 ```
 #### Types of Partition in Spark
-
 ```
     1. Hash Partitioning in Spark
     2. Range Partitioning in Spark
 ```
-
-
