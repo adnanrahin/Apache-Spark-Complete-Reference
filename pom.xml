@@ -15,6 +15,7 @@
         <module>spark-definitive-guide</module>
         <module>spark-resilient-distributed-dataset</module>
         <module>spark-flights-data-analysis</module>
+        <module>practice-problems</module>
     </modules>
 
     <name>apache-spark-complete-reference</name>
