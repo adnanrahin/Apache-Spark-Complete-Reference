@@ -77,3 +77,17 @@ stored on a node in the cluster. Partitions are basic units of parallelism in Ap
 ```
 
 #### Partitioning in Apache Spark
+```
+One important way to increase parallelism of spark processing is to increase the number of executors on the cluster. However, knowing how the data should be distributed, 
+so that the cluster can process data efficiently is extremely important.  Partitioning in Spark might not be helpful for all applications, for instance, if a RDD is scanned 
+only once, then portioning data within the RDD might not be helpful but if a dataset is reused multiple times in various key oriented operations like joins, then partitioning 
+data will be helpful.
+```
+#### Types of Partition in Spark
+
+```
+    1. Hash Partitioning in Spark
+    2. Range Partitioning in Spark
+```
+
+
