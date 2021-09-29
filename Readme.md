@@ -83,6 +83,7 @@ so that the cluster can process data efficiently is extremely important.  Partit
 only once, then portioning data within the RDD might not be helpful but if a dataset is reused multiple times in various key oriented operations like joins, then partitioning 
 data will be helpful.
 ```
+
 #### Types of Partition in Spark
 ```
     1. Hash Partitioning in Spark
