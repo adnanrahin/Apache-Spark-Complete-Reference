@@ -1,4 +1,4 @@
-## Introduction to Apache Spark and Scala
+# Introduction to Apache Spark and Scala
 
 
 ## [Programming in Scala](https://github.com/adnanrahin/Apache-Spark-Complete-Reference/tree/master/programming-in-scala) 
